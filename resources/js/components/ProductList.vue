@@ -1,5 +1,5 @@
 <template>
-    <div class="font-sans bg-pink-300">
+    <div class="font-sans bg-[#dfcfe6]">
         <nav class="bg-pink-300 shadow-md py-4">
             <div class="container mx-auto max-w-screen-xl px-4 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
 
@@ -17,9 +17,89 @@
                     <button class="bg-orange-400 hover:bg-orange-500 text-white font-medium py-2 px-4 rounded-xl shadow">
                         Көмек беру
                     </button>
-                    <button class="bg-sky-400 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-xl shadow">
+
+                    <button @click="showModal = 'login'" class="bg-sky-400 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-xl shadow">
                         Кіру
                     </button>
+
+                    <!-- Модальное окно -->
+                    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50">
+                        <div @click="closeModal" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+                        <!-- Login Modal -->
+                        <div v-if="showModal === 'login'" class="relative bg-white rounded-3xl w-96 p-8 shadow-lg z-10">
+                            <h2 class="text-center text-2xl font-bold mb-6">Войти</h2>
+
+                            <div class="mb-4 relative">
+                                <input type="text" v-model="phone" @input="formatPhoneNumber" maxlength="16" placeholder="+7 ___ ___ __ __" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]" />
+                            </div>
+                            <div class="mb-4 relative">
+                                <input :type="isVisible ? 'text' : 'password'" placeholder="Введите пароль" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]" />
+                                <span @click="toggleVisibility" class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-[#cda57d] transition-colors">
+                                    <component :is="isVisible ? 'eye-off-icon' : 'eye-icon'" class="w-5 h-5" />
+                                </span>
+                            </div>
+
+                            <button class="w-full py-3 bg-[#cda57d] text-white rounded-lg font-bold mb-4">Войти</button>
+                            <button @click="showModal = 'register'" class="w-full py-3 border-2 border-[#cda57d] text-[#cda57d] rounded-lg font-bold mb-4">Зарегистрироваться</button>
+                            <p class="text-xs text-center text-gray-500 mb-4">
+                                Нажимая на кнопку «Зарегистрироваться», вы соглашаетесь с условиями <a href="#" class="text-[#cda57d] underline">договора-оферты</a> и даете согласие на обработку <a href="#" class="text-[#cda57d] underline">персональных данных</a>.
+                            </p>
+                            <a href="#" class="text-center block text-[#cda57d]">Забыл пароль</a>
+                        </div>
+
+                        <!-- Register Modal -->
+                        <div v-if="showModal === 'register'" class="fixed inset-0 flex items-center justify-center z-50">
+                            <div @click="closeModal" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+                            <div class="relative bg-white rounded-3xl w-96 p-8 shadow-lg z-10">
+                                <h2 class="text-center text-2xl font-bold mb-6">Зарегистрироваться</h2>
+
+                                <div v-if="step === 1" class="mb-4">
+                                    <input
+                                        v-model="email"
+                                        @input="validateEmail"
+                                        placeholder="Введите email"
+                                        class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
+                                    />
+                                    <button :disabled="!validEmail" @click="nextStep" class="w-full mt-4 py-3 bg-[#cda57d] text-white rounded-lg font-bold">
+                                        Получить код
+                                    </button>
+                                </div>
+
+                                <div v-if="step === 2" class="mb-4">
+                                    <input
+                                        v-model="code"
+                                        @input="validateCode"
+                                        maxlength="6"
+                                        placeholder="Введите код"
+                                        class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
+                                    />
+                                    <button :disabled="code.length !== 6" @click="nextStep" class="w-full mt-4 py-3 bg-[#cda57d] text-white rounded-lg font-bold">
+                                        Далее
+                                    </button>
+                                </div>
+
+                                <div v-if="step === 3" class="mb-4">
+                                    <input
+                                        v-model="password"
+                                        type="password"
+                                        placeholder="Создайте пароль"
+                                        class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
+                                    />
+                                    <button :disabled="password.length < 6" @click="submitForm" class="w-full mt-4 py-3 bg-[#cda57d] text-white rounded-lg font-bold">
+                                        Создать пароль
+                                    </button>
+                                </div>
+
+                                <button @click="closeModal" class="w-full mt-4 py-3 border-2 border-[#cda57d] text-[#cda57d] rounded-lg font-bold">
+                                    Отмена
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <!-- Тілдер -->
                     <div class="flex items-center gap-2">
@@ -98,12 +178,20 @@
             </div>
         </div>
     </div>
+    <HomePage></HomePage>
 </template>
 
 <script>
 import axios from 'axios';
+import HomePage from './HomePage.vue';
+import VueTheMask from 'vue-the-mask';
+import { ref } from 'vue';
+import { Eye, EyeOff } from 'lucide-vue-next';
 
 export default {
+    directives: {
+      mask:VueTheMask.mask,
+    },
     data() {
         return {
             products: [],
@@ -114,7 +202,40 @@ export default {
             autoAdvanceTimer: null,
             touchStartX: 0,
             touchEndX: 0,
+            showModal: false,
+            phone:"+7 ",
+            step:1,
+            email:"",
+            validEmail: false,
+            code:"",
+            password: "",
         };
+    },
+
+    components: {
+        HomePage,
+        'eye-icon': Eye,
+        'eye-off-icon': EyeOff
+    },
+
+    setup() {
+        const showModal = ref('');
+        const isVisible = ref(false);
+        const phone = ref('+7 ');
+        const email = ref('');
+        const verificationCode = ref('');
+        const verificationSent = ref(false);
+        const isVerified = ref(false);
+
+        const closeModal = () => (showModal.value = '');
+        const toggleVisibility = () => (isVisible.value = !isVisible.value);
+        const formatPhoneNumber = () => {
+            phone.value = phone.value.replace(/[^\d+]/g, '').replace(/(.{3})(.{3})(.{3})(.{2})(.{2})/, '$1 $2 $3 $4 $5').substring(0, 16);
+        };
+        const sendVerificationCode = () => (verificationSent.value = true);
+        const verifyCode = () => (isVerified.value = true);
+
+        return { showModal, isVisible, phone, email, verificationCode, verificationSent, isVerified, closeModal, toggleVisibility, formatPhoneNumber, sendVerificationCode, verifyCode };
     },
 
     async created() {
@@ -150,6 +271,40 @@ export default {
     },
 
     methods: {
+        closeModal() {
+            this.showModal = false;
+            this.step = 1;
+            this.email = "";
+            this.code = "";
+            this.password = "";
+        },
+        validateEmail() {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            this.validEmail = emailPattern.test(this.email);
+        },
+        validateCode() {
+            this.code = this.code.replace(/[^0-9]/g, "").slice(0, 6);
+        },
+        nextStep() {
+            this.step++;
+        },
+        submitForm() {
+            alert(`Пароль создан: ${this.password}`);
+            this.closeModal();
+        },
+        formatPhoneNumber() {
+            let digits = this.phone.replace(/\D/g, "");
+
+            if (!digits.startsWith("7")) {
+                digits = "7" + digits;
+            }
+
+            if (digits.length > 11) {
+                digits = digits.slice(0, 11);
+            }
+
+            this.phone = `+7 ${digits.slice(1, 4)} ${digits.slice(4, 7)} ${digits.slice(7, 11)}`.trim();
+        },
         async deleteProduct(id) {
             if (confirm('Are you sure you want to delete this product?')) {
                 await axios.delete(`/api/products/${id}`);

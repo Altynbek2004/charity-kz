@@ -242,6 +242,34 @@ export default {
         const response = await axios.get('/api/products');
         this.products = response.data;
     },
+
+    mounted() {
+        this.slides = document.querySelectorAll('.carousel-item');
+        this.indicators = document.querySelectorAll('.bottom-2 button, .bottom-4 button');
+        this.progressBar = document.querySelector('.progress-bar');
+        const carousel = document.querySelector('.carousel-track');
+
+        carousel.addEventListener('touchstart', e => {
+            this.touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', e => {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+        }, { passive: true });
+
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                this.currentSlide = index;
+                this.updateSlides();
+                this.resetAutoAdvance();
+            });
+        });
+
+        this.updateSlides();
+        this.resetAutoAdvance();
+    },
+
     methods: {
         closeModal() {
             this.showModal = false;
@@ -283,28 +311,134 @@ export default {
                 this.products = this.products.filter(product => product.id !== id);
             }
         },
+
+        handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = this.touchStartX - this.touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+        },
+
+        updateSlides() {
+            this.slides.forEach((slide, index) => {
+                slide.className = 'carousel-item absolute top-0 left-0 w-full h-full';
+                if (index === this.currentSlide) {
+                    slide.classList.add('active');
+                } else if (index === (this.currentSlide + 1) % this.slides.length) {
+                    slide.classList.add('next');
+                } else if (index === (this.currentSlide - 1 + this.slides.length) % this.slides.length) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('hidden');
+                }
+            });
+
+            this.indicators.forEach((indicator, index) => {
+                indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${
+                    index === this.currentSlide ? 'bg-white/40' : 'bg-white/20'
+                } hover:bg-white/60`;
+            });
+
+            if (this.progressBar) {
+                this.progressBar.style.width = `${((this.currentSlide + 1) / this.slides.length) * 100}%`;
+            }
+        },
+
+        resetAutoAdvance() {
+            clearInterval(this.autoAdvanceTimer);
+            this.autoAdvanceTimer = setInterval(this.nextSlide, 5000);
+        },
+
+        nextSlide() {
+            this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            this.updateSlides();
+            this.resetAutoAdvance();
+        },
+
+        prevSlide() {
+            this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+            this.updateSlides();
+            this.resetAutoAdvance();
+        },
     },
 };
 </script>
 
-<style scoped>
-.create-btn, .delete-btn {
-    margin-left: 10px;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
+<style>
+.carousel-container {
+    perspective: 1000px;
+    touch-action: pan-y pinch-zoom;
 }
-.delete-btn {
-    background-color: red;
-    color: white;
+
+.carousel-track {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.create-btn {
-    display: block;
-    margin-top: 20px;
-    background-color: green;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    padding: 8px 12px;
+
+.carousel-item {
+    backface-visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+}
+
+@media (max-width: 640px) {
+    .carousel-item.prev {
+        opacity: 0;
+        transform: scale(0.8) translateX(-50%) translateZ(-100px);
+    }
+
+    .carousel-item.next {
+        opacity: 0;
+        transform: scale(0.8) translateX(50%) translateZ(-100px);
+    }
+}
+
+@media (min-width: 641px) {
+    .carousel-item.prev {
+        opacity: 0.7;
+        transform: scale(0.9) translateX(-100%) translateZ(-100px);
+    }
+
+    .carousel-item.next {
+        opacity: 0.7;
+        transform: scale(0.9) translateX(100%) translateZ(-100px);
+    }
+}
+
+.carousel-item.hidden {
+    opacity: 0;
+    transform: scale(0.8) translateZ(-200px);
+}
+
+.nav-button {
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+@media (hover: hover) {
+    .nav-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+}
+
+.nav-button:active {
+    transform: scale(0.95);
+}
+
+.progress-bar {
+    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 </style>

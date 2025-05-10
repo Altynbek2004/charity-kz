@@ -2,7 +2,7 @@
     <section class="py-16 px-4 bg-gray-50">
         <div class="container mx-auto sm:flex items-center max-w-screen-xl gap-8">
             <!-- Left side with image -->
-            <div class="sm:w-1/2 p-10">
+            <div class="sm:w-1/2 p-10 fade-in" id="about-us-left">
                 <div class="text-center">
                     <img
                         src="/storage/app/public/mainContent/mainImage.png"
@@ -13,169 +13,123 @@
             </div>
 
             <!-- Right side with text content -->
-            <div class="sm:w-1/2 p-5">
+            <div class="sm:w-1/2 p-5 fade-in" id="about-us-right" style="animation-delay: 0.5s;">
                 <div>
-          <span class="text-gray-500 border-b-2 border-indigo-600 uppercase text-2xl">
-            <b>Біз туралы</b>
-          </span>
+                    <span class="text-gray-500 border-b-2 border-indigo-600 uppercase text-2xl">
+                        <b>{{ $t('about_us') }}</b>
+                    </span>
                     <h2 class="my-4 font-bold text-3xl sm:text-4xl">
-                        Қолдау -  <span class="text-red-600">Бірге қамқор болайық.</span>
+                        {{ $t('support') }} - <span class="text-red-600">{{ $t('together_caring')}}</span>
                     </h2>
                     <p class="text-gray-700">
-                        Бала — Болашақ, Ал Олардың Бақытты Болашағы — Біздің Бүгінгі
-                        Қолымызда. Біз Әрбір Жанашыр Жанмен Бірге Мұқтаж Балаларға Үміт
-                        Сыйлауға Дайынбыз.
+                        {{ $t('children_future') }}
                     </p>
                 </div>
             </div>
         </div>
+
+
     </section>
 
 
     <section class="py-16 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Көмек Қажет Ететін Топтар</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center">{{ $t('groups_in_need')}}</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Medical Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
                     <img src="https://img.freepik.com/photos-premium/peinture-representant-pere-ses-enfants-bras-autour-epaules_865340-1123.jpg"
                          class="w-full h-64 object-cover" alt="Medical help">
                     <div class="p-6">
                         <span class="text-green-500 text-sm font-medium">Medical</span>
                         <h3 class="text-xl font-bold mt-2 mb-3">Әлеуметтік Аз Қамтылған Отбасылар</h3>
                         <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
-
-                        <div class="mb-2 flex justify-between text-sm">
-                            <span>Donatone</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: 60%"></div>
-                        </div>
-
-                        <div class="flex justify-between text-sm mb-6">
-                            <span>Raised: $600</span>
-                            <span>Goal: $1,000</span>
-                        </div>
-                        <button class="bg-white text-green-500 w-full py-3 rounded font-medium border border-green-500">Donate Now</button>
                     </div>
                 </div>
 
                 <!-- Homeless Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
                     <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
                          class="w-full h-64 object-cover" alt="Homeless children">
                     <div class="p-6">
                         <span class="text-green-500 text-sm font-medium">Homeless</span>
                         <h3 class="text-xl font-bold mt-2 mb-3">Жетім Және Ата-Анасының Қамқорлығынсыз Қалған Балалар</h3>
                         <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
-
-                        <div class="mb-2 flex justify-between text-sm">
-                            <span>Donatone</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
-                        </div>
-
-                        <div class="flex justify-between text-sm mb-6">
-                            <span>Raised: $8500</span>
-                            <span>Goal: $10,000</span>
-                        </div>
-
-                        <button class="bg-white text-green-500 w-full py-3 rounded font-medium border border-green-500">Donate Now</button>
                     </div>
                 </div>
 
                 <!-- Education Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
                     <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
                          class="w-full h-64 object-cover" alt="Children with disabilities">
                     <div class="p-6">
                         <span class="text-green-500 text-sm font-medium">Education</span>
                         <h3 class="text-xl font-bold mt-2 mb-3">Мүмкіндігі Шектеулі Балалар</h3>
                         <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
-
-                        <div class="mb-2 flex justify-between text-sm">
-                            <span>Donatone</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: 90%"></div>
-                        </div>
-
-                        <div class="flex justify-between text-sm mb-6">
-                            <span>Raised: $9,000</span>
-                            <span>Goal: $10,000</span>
-                        </div>
-
-                        <button class="bg-white text-green-500 w-full py-3 rounded font-medium border border-green-500">Donate Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-gray-700 py-20 px-4 text-white text-center relative">
+
+    <section class="bg-gray-700 py-20 px-4 text-white text-center relative fade-in-scale">
         <h1 class="text-3xl font-bold mb-12">Ахмет Байтұрсынұлы</h1>
 
         <div class="relative max-w-4xl mx-auto">
-            <!-- Large Quote Marks -->
             <div class="text-gray-500 text-9xl font-bold absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-20">
                 " "
             </div>
 
             <p class="text-xl md:text-2xl font-medium leading-relaxed z-10 relative">
-                Балам Деген Жұрт Болмаса – Жұртым Дейтін Бала Қайдан Шықсын
+                {{ $t('quote') }}
             </p>
         </div>
     </section>
 
+
     <section class="py-16 px-4 md:px-8">
         <h2 class="text-3xl font-bold mb-16 max-w-4xl mx-auto">
-            Бір Жүрек Өзгеріс Әкеледі, Ал Жүздеген Жүрек Ғажайып Жасайды
+            {{ $t('quote1')}}
         </h2>
 
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-            <!-- Stat 1 -->
-            <div class="bg-green-50 p-8">
+            <div class="bg-green-50 p-8 stat-card">
                 <h3 class="text-4xl font-bold mb-3">109 500+</h3>
                 <p class="text-gray-700">
                     2025 Жылы Қазақстанда Мүгедектігі Бар Балалардың Жалпы Саны.
                 </p>
             </div>
 
-            <!-- Stat 2 -->
-            <div class="bg-green-50 p-8">
+            <div class="bg-green-50 p-8 stat-card">
                 <h3 class="text-4xl font-bold mb-3">31 000+</h3>
                 <p class="text-gray-700">
                     2025 Жылы Қазақстанда Тіркелген Жетім Және Ата-Анасының Қамқорлығынсыз Қалған Балалар.
                 </p>
             </div>
 
-            <!-- Stat 3 -->
-            <div class="bg-green-50 p-8">
+            <div class="bg-green-50 p-8 stat-card">
                 <h3 class="text-4xl font-bold mb-3">8,92%</h3>
                 <p class="text-gray-700">
                     Көпбалалы Отбасылар Арасында Кедейлік Деңгейі.
                 </p>
             </div>
 
-            <!-- Stat 4 -->
-            <div class="bg-green-50 p-8">
+            <div class="bg-green-50 p-8 stat-card">
                 <h3 class="text-4xl font-bold mb-3">100+</h3>
                 <p class="text-gray-700">
                     Country Member
                 </p>
             </div>
         </div>
-    </section>  <!-- footer -->
+    </section>
+
 
     <section class="py-16 px-4 md:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold">Жаңалықтар</h2>
+                <h2 class="text-3xl font-bold">{{ $t('news')}}</h2>
                 <div class="flex gap-2">
                     <button class="bg-green-50 hover:bg-green-100 rounded-full p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -192,7 +146,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Blog Post 1 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100">
+                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
                     <div class="h-56 bg-gray-200"></div>
                     <div class="p-6">
                         <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
@@ -215,12 +169,12 @@
                             Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
                         </p>
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3">Read More</button>
+                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>
                     </div>
                 </div>
 
                 <!-- Blog Post 2 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100">
+                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
                     <div class="h-56 bg-gray-200"></div>
                     <div class="p-6">
                         <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
@@ -243,12 +197,12 @@
                             Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
                         </p>
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3">Read More</button>
+                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>
                     </div>
                 </div>
 
                 <!-- Blog Post 3 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100">
+                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
                     <div class="h-56 bg-gray-200"></div>
                     <div class="p-6">
                         <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
@@ -271,12 +225,12 @@
                             Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
                         </p>
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3">Read More</button>
+                        <button class="border border-green-500 text-green-500 px-8 py-3 btn-ripple">{{ $t('read_more')}}</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section> <!-- News -->
+    </section>
 
     <footer class="bg-gray-800 text-white py-12 px-4 md:px-8">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -358,4 +312,156 @@
     </footer>  <!-- footer -->
 </template>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const fadeElements = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.5 }
+    );
+    fadeElements.forEach((element) => {
+        observer.observe(element);
+    });
+});
+export default {
+    mounted() {
+        // Fade Up
+        const cards = document.querySelectorAll(".fade-up");
+        const fadeUpObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        fadeUpObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.7 }
+        );
+        cards.forEach((card) => fadeUpObserver.observe(card));
+
+        // Fade In Scale
+        const section = document.querySelector(".fade-in-scale");
+        const scaleObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        scaleObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+        if (section) scaleObserver.observe(section);
+
+        // Stat Cards
+        const statCards = document.querySelectorAll(".stat-card");
+        const statCardObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        statCardObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+        statCards.forEach((card) => statCardObserver.observe(card));
+
+        // News Cards
+        const newsCards = document.querySelectorAll(".news-card");
+        const newsCardObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        newsCardObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.6 }
+        );
+        newsCards.forEach((card) => newsCardObserver.observe(card));
+    },
+
+};
 </script>
+<style>
+    .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+    }
+
+    .fade-up.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fade-in-scale {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.8s ease-out;
+    }
+
+    .fade-in-scale.show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    .stat-card {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+    }
+
+    .stat-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .news-card {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+    }
+
+    .news-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .btn-ripple {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-ripple::after {
+        content: "";
+        position: absolute;
+        width: 300%;
+        height: 300%;
+        top: 50%;
+        left: 50%;
+        background: rgba(76, 175, 80, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.6s;
+    }
+
+    .btn-ripple:hover::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+
+
+</style>

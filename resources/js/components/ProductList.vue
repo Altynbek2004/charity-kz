@@ -7,19 +7,27 @@
                 <div class="flex items-center gap-6">
                     <img src="/storage/app/public/navbarImage/logo.png" alt="QOLDAU" class="h-12 w-12 rounded-full">
                     <ul class="flex gap-6 text-sm font-semibold text-gray-800">
-                        <li><button class="hover:underline">Мәзір</button></li>
-                        <li><a href="#" class="hover:underline">Көмек алу</a></li>
+                        <li><button class="hover:underline">{{ $t('menu') }}</button></li>
+                        <li><a href="#" class="hover:underline">{{ $t('get_help') }}</a></li>
                     </ul>
                 </div>
 
                 <!-- Көмек беру / Кіру және тілдер -->
                 <div class="flex flex-wrap items-center gap-4">
                     <button class="bg-orange-400 hover:bg-orange-500 text-white font-medium py-2 px-4 rounded-xl shadow">
-                        Көмек беру
+                        {{ $t('help')}}
                     </button>
 
-                    <button @click="showModal = 'login'" class="bg-sky-400 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-xl shadow">
-                        Кіру
+                    <button v-if="!isLoggedIn" @click="showModal = 'login'" class="bg-sky-400 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-xl shadow">
+                        {{$t('login')}}
+                    </button>
+
+                    <button
+                        v-else
+                        @click="goToProfile"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-xl shadow"
+                    >
+                        My Profile
                     </button>
 
                     <!-- Модальное окно -->
@@ -28,31 +36,36 @@
 
                         <!-- Login Modal -->
                         <div v-if="showModal === 'login'" class="relative bg-white rounded-3xl w-96 p-8 shadow-lg z-10">
-                            <h2 class="text-center text-2xl font-bold mb-6">Войти</h2>
+                            <h2 class="text-center text-2xl font-bold mb-6">{{ $t('sign_in') }}</h2>
 
                             <div class="mb-4 relative">
                                 <input type="email" v-model="email" placeholder="hello@example.com" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]" />
                             </div>
                             <div class="mb-4 relative">
-                                <input :type="isVisible ? 'text' : 'password'" placeholder="Введите пароль" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]" />
+                                <input :type="isVisible ? 'text' : 'password'" v-model="password" placeholder="Введите пароль" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]" />
                                 <span @click="toggleVisibility" class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-[#cda57d] transition-colors">
                                     <component :is="isVisible ? 'eye-off-icon' : 'eye-icon'" class="w-5 h-5" />
                                 </span>
                             </div>
 
-                            <button class="w-full py-3 bg-[#cda57d] text-white rounded-lg font-bold mb-4">Войти</button>
-                            <button @click="showModal = 'register'" class="w-full py-3 border-2 border-[#cda57d] text-[#cda57d] rounded-lg font-bold mb-4">Зарегистрироваться</button>
+                            <button @click="submitLogin" class="w-full py-3 bg-[#cda57d] text-white rounded-lg font-bold mb-4">
+                                {{ $t('sign_in') }}
+                            </button>
+
+
+                            <button @click="showModal = 'register'" class="w-full py-3 border-2 border-[#cda57d] text-[#cda57d] rounded-lg font-bold mb-4">
+                                {{ $t('sign_up') }}</button>
                             <p class="text-xs text-center text-gray-500 mb-4">
                                 Нажимая на кнопку «Зарегистрироваться», вы соглашаетесь с условиями <a href="#" class="text-[#cda57d] underline">договора-оферты</a> и даете согласие на обработку <a href="#" class="text-[#cda57d] underline">персональных данных</a>.
                             </p>
-                            <a href="#" class="text-center block text-[#cda57d]">Забыл пароль</a>
+                            <a href="#" class="text-center block text-[#cda57d]">{{$t('forgot_password')}}</a>
                         </div>
 
                         <!-- Register Modal -->
                         <div v-if="showModal === 'register'" class="fixed inset-0 flex items-center justify-center z-50">
                             <div @click="closeModal" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
                             <div class="relative bg-white rounded-3xl w-96 p-8 shadow-lg z-10">
-                                <h2 class="text-center text-2xl font-bold mb-6">Зарегистрироваться</h2>
+                                <h2 class="text-center text-2xl font-bold mb-6">{{ $t('sign_up') }}</h2>
 
                                 <div v-if="step === 1" class="mb-4">
                                     <input
@@ -64,7 +77,7 @@
                                         class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
                                     />
                                     <button :disabled="!validEmail" @click="sendCode" class="w-full mt-4 py-3 bg-[#cda57d] text-white rounded-lg font-bold">
-                                        Получить код
+                                        {{ $t('get_code') }}
                                     </button>
 
                                 </div>
@@ -79,7 +92,7 @@
                                         class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
                                     />
                                     <button :disabled="code.length !== 6" @click="verifyCode" class="w-full mt-4 py-3 bg-[#cda57d] text-white rounded-lg font-bold">
-                                        Далее
+                                        {{ $t('next') }}
                                     </button>
                                 </div>
 
@@ -92,17 +105,17 @@
                                         class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-[#cda57d]"
                                     />
                                     <button @click="submitRegistration" class="w-full py-3 bg-[#cda57d] text-white rounded-lg font-bold mb-4">
-                                        Зарегистрироваться
+                                        {{ $t('sign_up') }}
                                     </button>
                                 </div>
 
                                 <button @click="closeModal" class="w-full mt-4 py-3 border-2 border-[#cda57d] text-[#cda57d] rounded-lg font-bold">
-                                    Отмена
+                                    {{ $t('cancel')}}
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <button @click="openRegister" class="bg-[#cda57d] text-white px-4 py-2 rounded-lg">Зарегистрироваться</button>
+                            <button @click="openRegister" class="bg-[#cda57d] text-white px-4 py-2 rounded-lg">{{ $t('sign_up') }}</button>
                         </div>
 
                     </div>
@@ -110,9 +123,15 @@
 
                     <!-- Тілдер -->
                     <div class="flex items-center gap-2">
-                        <img src="https://flagcdn.com/w40/kz.png" alt="KZ" class="h-5 w-5 rounded-full" />
-                        <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="h-5 w-5 rounded-full" />
-                        <img src="https://flagcdn.com/w40/ru.png" alt="RU" class="h-5 w-5 rounded-full" />
+                        <button>
+                            <img @click="changeLanguage('kz')" src="https://flagcdn.com/w40/kz.png" alt="KZ" class="h-5 w-5 rounded-full" />
+                        </button>
+                        <button>
+                            <img @click="changeLanguage('en')" src="https://flagcdn.com/w40/gb.png" alt="EN" class="h-5 w-5 rounded-full" />
+                        </button>
+                        <button>
+                            <img @click="changeLanguage('ru')" src="https://flagcdn.com/w40/ru.png" alt="RU" class="h-5 w-5 rounded-full" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -216,7 +235,10 @@ export default {
             validEmail: true,
             code:"",
             password: "",
-            loading: false
+            loading: false,
+            isLoggedIn: false,
+            isVisible: false,
+
         };
     },
 
@@ -225,6 +247,7 @@ export default {
         'eye-icon': Eye,
         'eye-off-icon': EyeOff
     },
+
 
     setup() {
         const showModal = ref('');
@@ -243,9 +266,8 @@ export default {
         return { showModal, isVisible, phone, email, verificationCode, verificationSent, isVerified, closeModal, toggleVisibility, sendVerificationCode, verifyCode };
     },
 
-    async created() {
-        const response = await axios.get('/api/products');
-        this.products = response.data;
+    created() {
+        this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
     },
 
     mounted() {
@@ -296,9 +318,6 @@ export default {
         },
         validateCode() {
             this.code = this.code.replace(/[^0-9]/g, "").slice(0, 6);
-        },
-        nextStep() {
-            this.step++;
         },
         handleSwipe() {
             const swipeThreshold = 50;
@@ -395,14 +414,41 @@ export default {
                     alert(response.data.message);
                     window.location.href = '/';
                 }
-
-                alert('Регистрация успешно завершена!');
             } catch (e) {
                 alert(e.response?.data?.message || 'Ошибка при регистрации');
             } finally {
                 this.loading = false;
             }
-        }
+        },
+        async submitLogin(){
+            try{
+                const response = await axios.post('/login',{
+                    email:this.email,
+                    password: this.password
+                });
+                this.isLoggedIn = true
+                localStorage.setItem('isLoggedIn', 'true')
+                this.closeModal()
+                alert(response.data.message || "Сәтті кірдіңіз");
+                this.showModal = '';
+            }catch (e){
+                if (e.response?.data?.message) {
+                    alert(e.response.data.error || 'Ошибка при логин');
+                } else {
+                    alert('Қате! Кейінірек байқап көріңіз')
+                }
+            }
+        },
+        goToProfile() {
+            this.$router.push( '/profile/user' )
+        },
+        changeLanguage(lang){
+            this.$i18n.locale = lang;
+        },
+
+        toggleVisibility() {
+            this.isVisible = !this.isVisible
+        },
     },
 };
 </script>

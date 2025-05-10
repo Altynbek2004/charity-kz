@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class VerificationCode extends Model
+use Illuminate\Notifications\Notifiable;
+
+class VerificationCode extends Authenticatable
 {
-    use HasFactory;
 
+    use HasFactory, Notifiable;
     protected $fillable = ['email', 'password', 'code', 'expires_at'];
 
     protected $casts = [

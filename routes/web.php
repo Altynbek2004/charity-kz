@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\LoginController;
 use App\Mail\VerificationCodeMail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/register',[RegisterController::class,'registerStore'])->name('registerStore');
+Route::post('/login',[LoginController::class,'loginStore'])->name('loginStore');
 
 Route::post('/send-code', [RegisterController::class, 'sendVerificationCode']);
 Route::post('/verify-code', [RegisterController::class, 'verifyCode']);

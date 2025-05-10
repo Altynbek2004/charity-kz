@@ -10,7 +10,7 @@
                     <li><button class="w-full text-left hover:text-green-300">Қайырымдылық тарихы</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің жазылмаларым</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің карталарым</button></li>
-                    <li><button class="w-full text-left hover:text-red-400">Аккаунттан шығу</button></li>
+                    <li><button @click="logout" class="w-full text-left hover:text-red-400">Аккаунттан шығу</button></li>
                 </ul>
             </aside>
 
@@ -87,6 +87,27 @@
     </div>
 </template>
 
-<script setup>
-// No logic needed for static version. You can bind data later via `ref()`
+<script>
+
+export default {
+    data()
+    {
+        return {
+
+        };
+    },
+
+    methods: {
+        logout()
+        {
+            localStorage.removeItem('isLoggedIn');
+            this.isLoggedIn = false;
+
+            this.$router.push('/');
+            alert('Сәтті шықтыңыз!');
+        }
+    },
+
+};
+
 </script>

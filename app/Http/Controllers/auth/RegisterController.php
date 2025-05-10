@@ -25,7 +25,7 @@ class RegisterController extends Controller
     public function sendVerificationCode(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:verification_codes,email',
         ]);
         $code = random_int(100000, 999999);
 
@@ -92,7 +92,7 @@ class RegisterController extends Controller
     public function registerStore(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email|unique:users',
+            'email'    => 'required|email|unique:verification_codes,email',
             'password' => 'required|min:6',
         ]);
 

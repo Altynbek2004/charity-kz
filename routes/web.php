@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\auth\RegisterController;
+use App\Mail\VerificationCodeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::post('/register',[RegisterController::class,'registerStore'])->name('registerStore');
+
+Route::post('/send-code', [RegisterController::class, 'sendVerificationCode']);
+Route::post('/verify-code', [RegisterController::class, 'verifyCode']);
 
 Route::get('/{any}', function () {
     return view('welcome');

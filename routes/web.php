@@ -33,6 +33,12 @@ Route::post('/profile', [ProfileUserController::class, 'store'])->name('profileS
 Route::post('/send-code', [RegisterController::class, 'sendVerificationCode']);
 Route::post('/verify-code', [RegisterController::class, 'verifyCode']);
 
+// Маршруты для интерфейса новостей
+Route::get('/news', function () {
+    return view('news.index');
+})->name('news.index');
+
+
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');

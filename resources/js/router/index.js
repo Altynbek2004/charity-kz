@@ -7,6 +7,7 @@ import Profile from "../components/Profile.vue";
 import CharityGroup from "../components/CharityGroup.vue";
 import GroupDetails from "../components/GroupDetails.vue";
 import GetHelp from "../components/GetHelp.vue";
+import PsichologyAi from "../components/PsichologyAi.vue";
 
 const routes = [
     {
@@ -40,6 +41,10 @@ const routes = [
     {
         path: '/help',
         component: GetHelp
+    },
+    {
+        path: '/ai',
+        component: PsichologyAi
     }
 ];
 

@@ -10,7 +10,7 @@
                     <li><button class="w-full text-left hover:text-green-300">Қайырымдылық тарихы</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің жазылмаларым</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің карталарым</button></li>
-                    <li><button class="w-full text-left hover:text-red-400">Аккаунттан шығу</button></li>
+                    <li><button @click="logout" class="w-full text-left hover:text-red-400">Аккаунттан шығу</button></li>
                 </ul>
             </aside>
 
@@ -46,33 +46,37 @@
                     Сіздің үлесіңіз: <span class="ml-2 font-bold text-white">0 ₸</span>
                 </div>
 
+                <div v-if="successMessage" class="bg-green-100 text-green-700 p-4 rounded-lg mb-4">
+                    {{ successMessage }}
+                </div>
+
                 <!-- Profile form -->
-                <form class="space-y-4">
+                <form @submit.prevent="submitProfile" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Есіміңіз</label>
-                        <input type="text" value="Фариза" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                        <input type="text" v-model="form.name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Тегіңіз</label>
-                        <input type="text" value="Бухарова" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                        <input type="text" v-model="form.surname" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Жынысыңыз</label>
-                        <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                            <option>Әйел адам</option>
-                            <option>Ер адам</option>
+                        <select v-model="form.gender" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="female">Әйел адам</option>
+                            <option value="male">Ер адам</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Телефон нөміріңіз</label>
-                        <input type="text" value="+7 707 937 3518" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                        <input type="text" v-model="form.phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Қалаңыз</label>
-                        <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                            <option>Алматы</option>
-                            <option>Астана</option>
-                            <option>Шымкент</option>
+                        <select v-model="form.city" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="almaty">Алматы</option>
+                            <option value="astana">Астана</option>
+                            <option value="shymkent">Шымкент</option>
                         </select>
                     </div>
 
@@ -87,6 +91,54 @@
     </div>
 </template>
 
-<script setup>
-// No logic needed for static version. You can bind data later via `ref()`
+<script>
+
+import axios from "axios";
+
+export default {
+    data()
+    {
+        return {
+            form: {
+                name: '',
+                surname: '',
+                gender: 'male',
+                phone: '',
+                city: 'almaty',
+            },
+            successMessage: '',
+        };
+    },
+
+    methods: {
+
+        async submitProfile(){
+          try{
+              const response = await axios.post('/profile', this.form);
+              this.successMessage = response.data.message;
+              this.form = {... this.form};
+              this.form = {
+                  name: '',
+                  surname: '',
+                  gender: 'male',
+                  phone: '',
+                  city: 'almaty'
+              };
+          }  catch (e){
+                console.log(e);
+          }
+        },
+
+        logout()
+        {
+            localStorage.removeItem('isLoggedIn');
+            this.isLoggedIn = false;
+
+            this.$router.push('/');
+            alert('Сәтті шықтыңыз!');
+        }
+    },
+
+};
+
 </script>

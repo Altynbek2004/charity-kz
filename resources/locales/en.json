@@ -1,0 +1,32 @@
+{
+    "menu": "Menu",
+    "get_help": "Get Help",
+
+    "help": "Help",
+    "login": "Login",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "sign_up_agreement": "By clicking 'Sign Up', you agree to the terms of the contract-offer and consent to the processing of personal data",
+    "forgot_password": "Forgot Password",
+    "get_code": "Get Code",
+    "next": "Next",
+    "cancel": "Cancel",
+
+    "about_us": "About Us",
+    "support": "Support",
+    "together_caring": "Let's care together.",
+    "children_future": "A child is the future, and their happy future is in our hands today. We are ready to give hope to children in need with every caring soul.",
+
+    "groups_in_need": "Groups in Need of Assistance",
+
+    "quote": "If there are no people who care for the children, how can a child who calls others 'my people' emerge?",
+    "quote1": "One heart brings change, but hundreds of hearts create a miracle",
+
+    "news": "News",
+    "read_more": "Read More"
+
+
+
+
+
+}

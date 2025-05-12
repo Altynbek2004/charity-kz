@@ -23,10 +23,21 @@
     "quote1": "One heart brings change, but hundreds of hearts create a miracle",
 
     "news": "News",
-    "read_more": "Read More"
+    "read_more": "Read More",
 
 
-
+    "add_news": "Add News",
+    "title": "Title",
+    "author": "Author",
+    "content": "Content",
+    "image": "Image",
+    "drag_and_drop": "Drag and drop image here or click to select",
+    "save": "Save",
+    "saving": "Saving...",
+    "news_added_success": "News successfully added!",
+    "news_added_error": "Error adding news",
+    "image_format_error": "Please upload an image",
+    "image_size_error": "Image size should not exceed 5MB"
 
 
 }

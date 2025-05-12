@@ -106,112 +106,113 @@
         </div>
     </section>
 
-    <!--Жаңалықтар-->
-    <section class="py-16 px-4 md:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold">{{ $t('news')}}</h2>
-                <div class="flex gap-2">
-                    <button class="bg-green-50 hover:bg-green-100 rounded-full p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="bg-green-50 hover:bg-green-100 rounded-full p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    <news-section></news-section>
+<!--    &lt;!&ndash;Жаңалықтар&ndash;&gt;-->
+<!--    <section class="py-16 px-4 md:px-8 bg-white">-->
+<!--        <div class="max-w-7xl mx-auto">-->
+<!--            <div class="flex justify-between items-center mb-10">-->
+<!--                <h2 class="text-3xl font-bold">{{ $t('news')}}</h2>-->
+<!--                <div class="flex gap-2">-->
+<!--                    <button class="bg-green-50 hover:bg-green-100 rounded-full p-4">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />-->
+<!--                        </svg>-->
+<!--                    </button>-->
+<!--                    <button class="bg-green-50 hover:bg-green-100 rounded-full p-4">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />-->
+<!--                        </svg>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Blog Post 1 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
-                    <div class="h-56 bg-gray-200"></div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span>Esther Howard</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span>12 Sep 2021</span>
-                            </div>
-                        </div>
+<!--            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">-->
+<!--                &lt;!&ndash; Blog Post 1 &ndash;&gt;-->
+<!--                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">-->
+<!--                    <div class="h-56 bg-gray-200"></div>-->
+<!--                    <div class="p-6">-->
+<!--                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />-->
+<!--                                </svg>-->
+<!--                                <span>Esther Howard</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />-->
+<!--                                </svg>-->
+<!--                                <span>12 Sep 2021</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <h3 class="text-xl font-bold mb-3">Charity, Expectations Vs. Reality</h3>
-                        <p class="text-gray-600 mb-4">
-                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
-                        </p>
+<!--                        <h3 class="text-xl font-bold mb-3">Charity, Expectations Vs. Reality</h3>-->
+<!--                        <p class="text-gray-600 mb-4">-->
+<!--                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...-->
+<!--                        </p>-->
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>
-                    </div>
-                </div>
+<!--                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Blog Post 2 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
-                    <div class="h-56 bg-gray-200"></div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span>Jacob Jones</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span>22 Aug 2021</span>
-                            </div>
-                        </div>
+<!--                &lt;!&ndash; Blog Post 2 &ndash;&gt;-->
+<!--                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">-->
+<!--                    <div class="h-56 bg-gray-200"></div>-->
+<!--                    <div class="p-6">-->
+<!--                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />-->
+<!--                                </svg>-->
+<!--                                <span>Jacob Jones</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />-->
+<!--                                </svg>-->
+<!--                                <span>22 Aug 2021</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <h3 class="text-xl font-bold mb-3">This Week's Top Stories About Charity</h3>
-                        <p class="text-gray-600 mb-4">
-                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
-                        </p>
+<!--                        <h3 class="text-xl font-bold mb-3">This Week's Top Stories About Charity</h3>-->
+<!--                        <p class="text-gray-600 mb-4">-->
+<!--                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...-->
+<!--                        </p>-->
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>
-                    </div>
-                </div>
+<!--                        <button class="border border-green-500 text-green-500 px-8 py-3">{{ $t('read_more')}}</button>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Blog Post 3 -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">
-                    <div class="h-56 bg-gray-200"></div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span>Floyd Miles</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span>30 Jul 2021</span>
-                            </div>
-                        </div>
+<!--                &lt;!&ndash; Blog Post 3 &ndash;&gt;-->
+<!--                <div class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card">-->
+<!--                    <div class="h-56 bg-gray-200"></div>-->
+<!--                    <div class="p-6">-->
+<!--                        <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z" />-->
+<!--                                </svg>-->
+<!--                                <span>Floyd Miles</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />-->
+<!--                                </svg>-->
+<!--                                <span>30 Jul 2021</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <h3 class="text-xl font-bold mb-3">Why You Should Focus On Charity</h3>
-                        <p class="text-gray-600 mb-4">
-                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...
-                        </p>
+<!--                        <h3 class="text-xl font-bold mb-3">Why You Should Focus On Charity</h3>-->
+<!--                        <p class="text-gray-600 mb-4">-->
+<!--                            Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Sed Diam Nonumy, Tempor Invidunt Ut Labore Et Magna Aliquyam Erat, Sed Diam Voluptua...-->
+<!--                        </p>-->
 
-                        <button class="border border-green-500 text-green-500 px-8 py-3 btn-ripple">{{ $t('read_more')}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!--                        <button class="border border-green-500 text-green-500 px-8 py-3 btn-ripple">{{ $t('read_more')}}</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 
     <div id="chat-widget" class="fixed bottom-4 right-4 z-50">
         <button @click="toggleChat" class="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-3 rounded-full shadow-2xl hover:scale-110 transition transform duration-300">
@@ -340,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 import axios from "axios";
-
+import NewsSection from "@/components/NewsSection.vue";
 const toggleChat = () => {
     const chatWindow = document.getElementById('chat-window');
     chatWindow.classList.toggle('hidden');
@@ -382,6 +383,7 @@ const sendMessage = () => {
         });
 };
 export default {
+    components:{NewsSection},
     mounted() {
         // Fade Up
         const cards = document.querySelectorAll(".fade-up");
@@ -557,7 +559,7 @@ export default {
     }
 
     .news-card {
-        opacity: 0;
+        //opacity: 0;
         transform: translateY(40px);
         transition: all 0.8s ease-out;
     }

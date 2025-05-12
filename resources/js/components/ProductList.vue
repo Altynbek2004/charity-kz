@@ -8,7 +8,7 @@
                     <img src="/storage/app/public/navbarImage/logo.png" alt="QOLDAU" class="h-12 w-12 rounded-full">
                     <ul class="flex gap-6 text-sm font-semibold text-gray-800">
                         <li><button class="hover:underline">{{ $t('menu') }}</button></li>
-                        <li><a href="#" class="hover:underline">{{ $t('get_help') }}</a></li>
+                        <li><a href="/help" class="hover:underline">{{ $t('get_help') }}</a></li>
                     </ul>
                 </div>
 

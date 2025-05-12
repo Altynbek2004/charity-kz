@@ -10,6 +10,7 @@
                     <li><button class="w-full text-left hover:text-green-300">Қайырымдылық тарихы</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің жазылмаларым</button></li>
                     <li><button class="w-full text-left hover:text-green-300">Менің карталарым</button></li>
+                    <li><button @click="createGroup" class="w-full text-left hover:text-green-300">Көмек керек топты құру</button></li>
                     <li><button @click="logout" class="w-full text-left hover:text-red-400">Аккаунттан шығу</button></li>
                 </ul>
             </aside>
@@ -127,6 +128,11 @@ export default {
           }  catch (e){
                 console.log(e);
           }
+        },
+
+        createGroup()
+        {
+            this.$router.push('/create/group');
         },
 
         logout()

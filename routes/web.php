@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileUserController;
 use App\Mail\VerificationCodeMail;
@@ -20,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/register',[RegisterController::class,'registerStore'])->name('registerStore');
 Route::post('/login',[LoginController::class,'loginStore'])->name('loginStore');
+
+Route::get('/group',[GroupController::class,'index'])->name('groups.index');
+Route::post('/create/group',[GroupController::class,'store'])->name('store.group');
+Route::get('/groups/{id}',[GroupController::class,'show'])->name('group.show');
 
 Route::post('/profile', [ProfileUserController::class, 'store'])->name('profileStore');
 

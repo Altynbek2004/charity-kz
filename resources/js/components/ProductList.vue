@@ -165,13 +165,13 @@
                 </button>
 
                 <!-- Carousel track -->
-                <div class="carousel-track relative h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden">
+                <div class="carousel-track relative h-[400px] sm:h-[500px] md:h-[600px] w-full overflow-hidden">
                     <!-- Carousel items -->
                     <div class="carousel-item active absolute top-0 left-0 w-full h-full">
                         <div class="w-full h-full p-4 sm:p-8">
                             <div class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group">
-                                <img src="/storage/app/public/navbarImage/unsplash1.png" alt="Geometric art installation" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/40 to-purple-500/40 mix-blend-overlay"></div>
+                                <img src="/storage/app/public/navbarImage/navbarPhoto1.jpg" alt="Geometric art installation" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <div class="absolute inset-0 from-violet-500/40 to-purple-500/40 mix-blend-overlay"></div>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                     <div class="carousel-item next absolute top-0 left-0 w-full h-full">
                         <div class="w-full h-full p-4 sm:p-8">
                             <div class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group">
-                                <img src="/storage/app/public/navbarImage/unsplash2.png" alt="Futuristic tech setup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src="/storage/app/public/navbarImage/navbarPhoto2.jpg" alt="Futuristic tech setup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 <div class="absolute inset-0 bg-gradient-to-br from-fuchsia-500/40 to-pink-500/40 mix-blend-overlay"></div>
                             </div>
                         </div>
@@ -188,11 +188,27 @@
                     <div class="carousel-item hidden absolute top-0 left-0 w-full h-full">
                         <div class="w-full h-full p-4 sm:p-8">
                             <div class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group">
-                                <img src="/storage/app/public/navbarImage/unsplash3.png" alt="Abstract digital art" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src="/storage/app/public/navbarImage/navbarPhoto3.jpg" alt="Abstract digital art" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 <div class="absolute inset-0 bg-gradient-to-br from-pink-500/40 to-rose-500/40 mix-blend-overlay"></div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Cards at the bottom -->
+                    <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-6 py-6">
+                        <a href="/help/charity" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
+                            Қайырымдылық Көмек
+                        </a>
+                        <a href="/ai" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
+                            Психологиялық Көмек
+                        </a>
+                        <a href="/help/volunteering" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
+                            Еріктілік Қызметі
+                        </a>
+                    </div>
+
+
+
                 </div>
 
                 <!-- Indicators -->

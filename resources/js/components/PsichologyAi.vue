@@ -9,8 +9,7 @@ export default {
             userMessage: '',
             messages: [],
             loading: false,
-            apiKey: 'AIzaSyAALKQv-SwkcGekyP3BvWH4P-XLk49zSJ4', // Замените на свой API-ключ Gemini
-            // Инициализируем новый объект для хранения идентификатора сессии
+            apiKey: 'AIzaSyAALKQv-SwkcGekyP3BvWH4P-XLk49zSJ4',
             sessionId: null
         };
     },
@@ -18,7 +17,6 @@ export default {
         async sendMessage() {
             if (!this.userMessage.trim()) return;
 
-            // Добавляем сообщение пользователя в чат
             const userMessageText = this.userMessage.trim();
             this.messages.push({ role: 'user', content: userMessageText });
             this.userMessage = '';
@@ -27,9 +25,7 @@ export default {
             try {
                 let response;
 
-                // Если сессии еще нет, создаем новую сессию
                 if (!this.sessionId) {
-                    // Создаем новую сессию чата с Gemini
                     response = await axios.post(
                         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`,
                         {
@@ -49,7 +45,6 @@ export default {
                         }
                     );
                 } else {
-                    // Отправляем сообщение в существующую сессию
                     response = await axios.post(
                         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${this.apiKey}`,
                         {
@@ -70,7 +65,6 @@ export default {
                     );
                 }
 
-                // Обработка ответа
                 if (response.data &&
                     response.data.candidates &&
                     response.data.candidates.length > 0 &&
@@ -103,7 +97,6 @@ export default {
             }
         },
         clearChat() {
-            // Оставляем только приветственное сообщение
             this.messages = [{
                 role: 'assistant',
                 content: this.$t('greeting')

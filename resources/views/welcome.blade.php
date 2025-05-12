@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vue Laravel App</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preload" as="image" href="/storage/app/public/navbarImage/unsplash1.png">
-    <link rel="preload" as="image" href="/storage/app/public/navbarImage/unsplash2.png">
-    <link rel="preload" as="image" href="/storage/app/public/navbarImage/unsplash3.png">
-    <link rel="preload" as="image" href="/storage/app/public/navbarImage/unsplash4.png">
+    <link rel="preload" as="image" href="/storage/app/public/navbarImage/navbarPhoto1.jpg">
+    <link rel="preload" as="image" href="/storage/app/public/navbarImage/navbarPhoto2.jpg">
+    <link rel="preload" as="image" href="/storage/app/public/navbarImage/navbarPhoto3.jpg">
 
 </head>
 <body>

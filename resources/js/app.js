@@ -2,6 +2,8 @@ import './bootstrap';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+// Импорт компонентов
+import NewsSection from './components/NewsSection.vue';
 
 import en from '../locales/en.json';
 import kz from '../locales/kz.json';

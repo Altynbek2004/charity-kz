@@ -37,7 +37,17 @@
     "news_added_success": "News successfully added!",
     "news_added_error": "Error adding news",
     "image_format_error": "Please upload an image",
-    "image_size_error": "Image size should not exceed 5MB"
+    "image_size_error": "Image size should not exceed 5MB",
 
+    "askQuestion": {
+        "title": "Psychological Chat",
+        "chat": "Chat with AI",
+        "clear": "Clear chat",
+        "start": "Start the conversation by sending a message",
+        "typing": "Typing",
+        "input": "Enter a message...",
+        "send": "Send"
+    },
 
+    "greeting": "Hello! I am your personal AI assistant."
 }

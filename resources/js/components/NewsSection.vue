@@ -247,6 +247,8 @@ export default {
             news: [],
             showModal: false,
             loading: false,
+            user: null, // Данные пользователя
+            loadingData: true, // Статус загрузки
             previewImage: null,
             selectedNews: null,
             currentPage: 1,
@@ -263,7 +265,20 @@ export default {
     created() {
         this.fetchNews();
     },
+    mounted() {
+        this.getUserData();
+    },
     methods: {
+        async getUserData() {
+            try {
+                const response = await axios.get('/api/user'); // Запрос к API для получения данных о пользователе
+                this.user = response.data; // Данные пользователя
+            } catch (error) {
+                console.error('Ошибка при получении данных пользователя:', error);
+            } finally {
+                this.loadingData = false;
+            }
+        },
         readMore(newsItem) {
             this.selectedNews = newsItem;
         },

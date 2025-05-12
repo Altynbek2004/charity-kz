@@ -31,49 +31,30 @@
 
     </section>
 
-
+    <!-- Көмек Қажет Ететін Топтар -->
     <section class="py-16 px-4 md:px-8">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 text-center">{{ $t('groups_in_need')}}</h2>
-
+            <!-- Карточкалар тұрады -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Medical Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
-                    <img src="https://img.freepik.com/photos-premium/peinture-representant-pere-ses-enfants-bras-autour-epaules_865340-1123.jpg"
-                         class="w-full h-64 object-cover" alt="Medical help">
+                <div
+                    v-for="group in groups"
+                    :key="group.id"
+                    @click="goToDetails(group.id)"
+                    class="group-card cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    <img :src="'/' + group.image" class="group-image" alt="Medical help">
                     <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Medical</span>
-                        <h3 class="text-xl font-bold mt-2 mb-3">Әлеуметтік Аз Қамтылған Отбасылар</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
-                    </div>
-                </div>
-
-                <!-- Homeless Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
-                         class="w-full h-64 object-cover" alt="Homeless children">
-                    <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Homeless</span>
-                        <h3 class="text-xl font-bold mt-2 mb-3">Жетім Және Ата-Анасының Қамқорлығынсыз Қалған Балалар</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
-                    </div>
-                </div>
-
-                <!-- Education Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-up">
-                    <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
-                         class="w-full h-64 object-cover" alt="Children with disabilities">
-                    <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Education</span>
-                        <h3 class="text-xl font-bold mt-2 mb-3">Мүмкіндігі Шектеулі Балалар</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum Dolor Sit Amet, Consete Sadipiscing Elitр, Sed Diam Nonumy...</p>
+                        <span class="text-green-500 text-sm font-medium">{{ group.name }}</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">{{ group.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ group.description }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
+    <!-- Ахмет Байтұрсынұлы -->
     <section class="bg-gray-700 py-20 px-4 text-white text-center relative fade-in-scale">
         <h1 class="text-3xl font-bold mb-12">Ахмет Байтұрсынұлы</h1>
 
@@ -88,7 +69,7 @@
         </div>
     </section>
 
-
+    <!--Бір жүрек өзгеріс әкеледі, ал жүздеген жүрек ғажайып жасайды-->
     <section class="py-16 px-4 md:px-8">
         <h2 class="text-3xl font-bold mb-16 max-w-4xl mx-auto">
             {{ $t('quote1')}}
@@ -125,7 +106,7 @@
         </div>
     </section>
 
-
+    <!--Жаңалықтар-->
     <section class="py-16 px-4 md:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-10">
@@ -232,6 +213,35 @@
         </div>
     </section>
 
+    <div id="chat-widget" class="fixed bottom-4 right-4 z-50">
+        <button @click="toggleChat" class="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-3 rounded-full shadow-2xl hover:scale-110 transition transform duration-300">
+            🤖
+        </button>
+    </div>
+
+    <div v-show="chatVisible" id="chat-window" class="fixed bottom-24 right-4 w-80 max-w-sm h-[480px] bg-white shadow-2xl rounded-2xl flex flex-col z-50 border border-gray-200 overflow-hidden animate__animated animate__fadeInUp">
+        <div class="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-3 px-4 font-semibold text-lg">
+            AI Чат
+            <button @click="toggleChat" class="absolute right-3 top-3 text-white hover:text-gray-300 text-sm">✖</button>
+        </div>
+
+        <div ref="messages" class="flex-1 px-4 py-3 overflow-y-auto text-sm space-y-3 bg-gray-50">
+            <div v-for="(message, index) in messages" :key="index" :class="message.sender === 'user' ? 'text-right' : 'text-left'">
+                <span :class="message.sender === 'user' ? 'inline-block bg-gray-200 px-3 py-2 rounded' : 'inline-block bg-blue-100 px-3 py-2 rounded'">
+                    {{ message.text }}
+                </span>
+            </div>
+        </div>
+
+        <div class="p-3 bg-white border-t border-gray-200 flex items-center space-x-2">
+            <input v-model="inputText" placeholder="Хабарлама жаз..." class="flex-1 text-sm px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400" @keydown.enter="sendMessage" />
+            <button @click="sendMessage" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm rounded-full transition">
+                Жіберу
+            </button>
+        </div>
+    </div>
+
+
     <footer class="bg-gray-800 text-white py-12 px-4 md:px-8">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
             <!-- Column 1 - Logo & Stats -->
@@ -329,6 +339,48 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(element);
     });
 });
+import axios from "axios";
+
+const toggleChat = () => {
+    const chatWindow = document.getElementById('chat-window');
+    chatWindow.classList.toggle('hidden');
+};
+const sendMessage = () => {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesDiv = document.getElementById('chat-messages');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'text-right';
+    userMsg.innerHTML = `<span class="inline-block bg-gray-200 px-3 py-2 rounded">${message}</span>`;
+    messagesDiv.appendChild(userMsg);
+
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    input.value = '';
+
+    fetch('/ai-message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+        },
+        body: JSON.stringify({ message: message })
+    })
+        .then(res => res.json())
+        .then(data => {
+            const botMsg = document.createElement('div');
+            botMsg.className = 'text-left';
+            botMsg.innerHTML = `<span class="inline-block bg-blue-100 px-3 py-2 rounded">${data.reply}</span>`;
+            messagesDiv.appendChild(botMsg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        })
+        .catch(err => {
+            console.error('AI жауап қатпады', err);
+        });
+};
 export default {
     mounted() {
         // Fade Up
@@ -392,18 +444,93 @@ export default {
         newsCards.forEach((card) => newsCardObserver.observe(card));
     },
 
+    data() {
+        return {
+            groups:[],
+            isVisible: false,
+            chatVisible: false,
+            inputText: '',
+            messages: [],
+        };
+    },
+    created() {
+        this.fetchGroups();
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    },
+    methods:{
+      async fetchGroups(){
+        try{
+            const response = await axios.get('/group');
+            this.groups = response.data;
+        }  catch (e)
+        {
+            console.error('Error fetching groups:', e);
+        }
+      },
+        handleScroll() {
+            const windowHeight = window.innerHeight;
+            const elements = document.querySelectorAll(".fade-up");
+            elements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - 100) {
+                    el.classList.add("show");
+                }
+            });
+        },
+
+        goToDetails(id) {
+            this.$router.push(`/group/${id}`);
+        },
+
+        toggleChat() {
+            this.chatVisible = !this.chatVisible;
+        },
+        async sendMessage() {
+            if (!this.inputText.trim()) return;
+
+            // Add user message
+            this.messages.push({ sender: 'user', text: this.inputText.trim() });
+            this.inputText = '';
+
+            // Simulate AI response (replace this with real API call)
+            setTimeout(() => {
+                this.messages.push({ sender: 'bot', text: 'Сәлем! Мен саған қалай көмектесе аламын?' });
+                this.$nextTick(() => {
+                    const messagesRef = this.$refs.messages;
+                    messagesRef.scrollTop = messagesRef.scrollHeight;
+                });
+            }, 500);
+        }
+
+    },
 };
 </script>
 <style>
-    .fade-up {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 0.8s ease-out;
+
+    .group-card {
+        background-color: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .fade-up.show {
-        opacity: 1;
-        transform: translateY(0);
+    .group-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .group-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .group-card:hover .group-image {
+        transform: scale(1.05);
     }
 
     .fade-in-scale {

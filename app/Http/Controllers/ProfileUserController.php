@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class ProfileUserController extends Controller
 {
 
+    public function authUser()
+    {
+        $user = auth()->user();
+        return response()->json($user);
+    }
 
     public function store(Request $request)
     {

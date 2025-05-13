@@ -14,9 +14,11 @@
 
                 <!-- Көмек беру / Кіру және тілдер -->
                 <div class="flex flex-wrap items-center gap-4">
-                    <button class="bg-orange-400 hover:bg-orange-500 text-white font-medium py-2 px-4 rounded-xl shadow">
-                        {{ $t('help')}}
-                    </button>
+                    <a href="/give-help">
+                        <button class="bg-orange-400 hover:bg-orange-500 text-white font-medium py-2 px-4 rounded-xl shadow">
+                            {{ $t('help')}}
+                        </button>
+                    </a>
 
                     <button v-if="!isLoggedIn" @click="showModal = 'login'" class="bg-sky-400 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-xl shadow">
                         {{$t('login')}}

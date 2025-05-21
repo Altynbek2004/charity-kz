@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\getHelpController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LoginController;
@@ -33,7 +34,7 @@ Route::get('/user',[ProfileUserController::class,'authUser'])->name('user.index'
 
 Route::post('/profile', [ProfileUserController::class, 'store'])->name('profileStore');
 
-
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('sendMail');
 
 Route::post('/send-code', [RegisterController::class, 'sendVerificationCode']);
 Route::post('/verify-code', [RegisterController::class, 'verifyCode']);

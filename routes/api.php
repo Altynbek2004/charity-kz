@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::apiResource('products', ProductController::class);
 
+// Contact form submission route
+Route::post('/contact', [ContactController::class, 'store']);
 // API маршруты для новостей
 Route::apiResource('news', NewsController::class);
 

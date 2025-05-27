@@ -11,6 +11,8 @@ import MyCard from "../components/MyCard.vue";
 import PsichologyAi from "../components/PsichologyAi.vue";
 import GiveHelp from "../components/GiveHelp.vue";
 import ContactForm from '../components/ContactForm.vue';
+import CharityHelp from "../components/design/CharityHelp.vue";
+import VolunteerService from '../components/design/VolunteerService.vue';
 
 const routes = [
     {
@@ -60,6 +62,16 @@ const routes = [
     {
         path: '/contact-us',
         component:ContactForm
+    }
+    ,
+    {
+        path: '/charity-help',
+        component:CharityHelp
+    }
+    ,
+    {
+        path: '/volunteer-service',
+        component:VolunteerService
     }
 ];
 

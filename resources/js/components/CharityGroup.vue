@@ -1,32 +1,40 @@
 <template>
-    <div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold mb-4">Create Group</h2>
+    <div class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Топты Құру</h2>
         <form @submit.prevent="submitForm" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700">Name</label>
-                <input v-model="form.name" type="text" id="name" placeholder="Enter name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <div class="mb-5">
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Аты</label>
+                <input v-model="form.name" type="text" id="name" placeholder="Топтың атын енгізіңіз"
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
                 <span v-if="errors.name" class="text-red-500 text-sm">{{ errors.name }}</span>
             </div>
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700">Title</label>
-                <input v-model="form.title" type="text" id="title" placeholder="Enter title" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <div class="mb-5">
+                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Тақырып</label>
+                <input v-model="form.title" type="text" id="title" placeholder="Тақырыпты енгізіңіз"
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
                 <span v-if="errors.title" class="text-red-500 text-sm">{{ errors.title }}</span>
             </div>
-            <div class="mb-4">
-                <label for="description" class="block text-gray-700">Description</label>
-                <textarea v-model="form.description" id="description" placeholder="Enter description" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            <div class="mb-5">
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Сипаттама</label>
+                <textarea v-model="form.description" id="description" placeholder="Топ сипаттамасы"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
                 <span v-if="errors.description" class="text-red-500 text-sm">{{ errors.description }}</span>
             </div>
-            <div class="mb-4">
-                <label for="image" class="block text-gray-700">Image</label>
-                <input @change="handleFileChange" type="file" id="image" accept="image/*" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <div class="mb-5">
+                <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Сурет</label>
+                <input @change="handleFileChange" type="file" id="image" accept="image/*"
+                       class="w-full p-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 bg-white" />
                 <span v-if="errors.image" class="text-red-500 text-sm">{{ errors.image }}</span>
             </div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Group</button>
-            <p v-if="status" class="mt-4 text-green-500">{{ status }}</p>
+            <button type="submit"
+                    class="w-full bg-green-800 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
+                Топты Құру
+            </button>
+            <p v-if="status" class="mt-4 text-center text-green-600 font-medium">{{ status }}</p>
         </form>
     </div>
 </template>
+
 
 <script>
 import axios from 'axios';

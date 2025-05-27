@@ -56,13 +56,13 @@
 
                     <!-- Cards at the bottom -->
                     <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-6 py-6">
-                        <a href="/help/charity" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
+                        <a href="/charity-help" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
                             Қайырымдылық Көмек
                         </a>
                         <a href="/ai" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
                             Психологиялық Көмек
                         </a>
-                        <a href="/help/volunteering" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
+                        <a href="/volunteer-service" class="bg-white text-gray-900 px-8 py-6 rounded-2xl shadow-lg text-center text-lg font-semibold hover:bg-gray-100 transition">
                             Еріктілік Қызметі
                         </a>
                     </div>

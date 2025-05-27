@@ -10,6 +10,11 @@ import GetHelp from "../components/GetHelp.vue";
 import MyCard from "../components/MyCard.vue";
 import PsichologyAi from "../components/PsichologyAi.vue";
 import GiveHelp from "../components/GiveHelp.vue";
+import AboutUs from "../components/design/AboutUs.vue";
+import AboutUsSection from "../components/design/AboutUsSection.vue";
+import notFound from "../components/design/notFound.vue";
+import Navbar from "../components/design/Navbar.vue";
+import Donate from "../components/design/Donate.vue";
 
 const routes = [
     {
@@ -55,7 +60,41 @@ const routes = [
     {
         path: '/give-help',
         component:GiveHelp
+    },
+    {
+        path: '/aboutus',
+        component: AboutUs
+    },
+    {
+        path: '/aboutus-section',
+        component: AboutUsSection
+    },
+    {
+        path: '/404',
+        component: notFound
+    },
+    {
+        path: '/navbar',
+        component: Navbar
+    },
+    {
+        path: '/donate',
+        component: Donate
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];
 
 const router = createRouter({

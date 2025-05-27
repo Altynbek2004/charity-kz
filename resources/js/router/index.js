@@ -10,6 +10,7 @@ import GetHelp from "../components/GetHelp.vue";
 import MyCard from "../components/MyCard.vue";
 import PsichologyAi from "../components/PsichologyAi.vue";
 import GiveHelp from "../components/GiveHelp.vue";
+import ContactForm from '../components/ContactForm.vue';
 
 const routes = [
     {
@@ -55,6 +56,10 @@ const routes = [
     {
         path: '/give-help',
         component:GiveHelp
+    },
+    {
+        path: '/contact-us',
+        component:ContactForm
     }
 ];
 

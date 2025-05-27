@@ -18,12 +18,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guard_name = 'web';
 
     protected $fillable = [
         'name',
         'surname',
+        'email',
         'gender',
+        'password',
+        'code',
+        'expires_at',
+        'avatar',
+        'photo_url',
         'phone_number',
         'city',
     ];
@@ -44,7 +49,14 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'expires_at' => 'datetime',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isExpired()
+    {
+        return $this->expires_at->isPast();
+    }
+
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileUserController extends Controller
 {
@@ -17,14 +19,21 @@ class ProfileUserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname'  => 'required|string|max:255',
-            'gender'     => 'required|in:male,female',
-            'phone'      => 'required|string|max:20',
-            'city'       => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'surname'  => 'string|max:255',
+            'gender'     => 'in:male,female',
+            'phone_number'      => 'string|max:20',
+            'city'=> 'string|max:255',
         ]);
 
-        User::create($validatedData);
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $filename = time() . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('public/profile_photos', $filename);
+            $validatedData['photo_url'] = Storage::url($path);
+        }
+
+        User::find(Auth::id())->update($validatedData);
 
         return response()->json([
             'success' => true,

@@ -1,9 +1,35 @@
 <template>
-    <div class="bg-gray-100 py-10 min-h-screen flex justify-center items-start">
-        <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg flex overflow-hidden">
-            <!-- Sidebar -->
-            <aside class="w-1/4 bg-green-900 text-white p-6">
-                <h2 class="text-2xl font-bold mb-6">Мәзір</h2>
+    <!-- Container -->
+    <div class="bg-gray-100 py-10 min-h-screen flex justify-center items-start px-4 sm:px-6">
+        <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
+
+            <!-- Mobile menu toggle button -->
+            <button
+                class="md:hidden fixed top-4 left-4 z-50 bg-green-800 text-white p-2 rounded focus:outline-none"
+                @click="showMenu = !showMenu"
+            >
+                <!-- Иконка: бургер -->
+                <svg v-if="!showMenu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <!-- Иконка: крестик -->
+                <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        <!-- Sidebar -->
+            <aside
+                :class="[
+        'bg-green-900 text-white p-6 fixed md:static top-0 left-0 h-full z-40 transform transition-transform duration-300 ease-in-out',
+        showMenu ? 'translate-x-0 w-3/4 sm:w-2/4' : '-translate-x-full',
+        'md:translate-x-0 md:w-1/4 md:block'
+    ]"
+            >
+                <h2 class="text-2xl mx-4 font-bold mb-6">Мәзір</h2>
                 <ul class="space-y-4">
                     <li>
                         <button
@@ -79,7 +105,7 @@
             </aside>
 
             <!-- Main Content -->
-            <main class="w-3/4 p-10 bg-gray-50">
+            <main class="w-full md:w-3/4 p-6 sm:p-10 bg-gray-50">
                 <!-- Profile Section -->
                 <section
                     v-show="showSection === 'profile'"
@@ -88,34 +114,26 @@
                 >
                     <!-- Profile photo -->
                     <div class="flex items-center mb-8">
-                        <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center relative overflow-hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-12 w-12 text-gray-600"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5.121 17.804A7.5 7.5 0 0112 15.75a7.5 7.5 0 016.879 2.054M15 11a3 3 0 10-6 0 3 3 0 006 0z"
-                                />
-                            </svg>
+                        <!-- Avatar -->
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-300 flex items-center justify-center relative overflow-hidden cursor-pointer" @click="triggerFileInput">
+
+                        <img :src="user.photo_url || photoPreview " />
+
+
+
                             <div class="absolute bottom-0 right-0 bg-orange-400 p-1 rounded-full text-white">📷</div>
+                            <input type="file" @change="onPhotoChange" accept="image/*" class="hidden" ref="photoInput">
                         </div>
+
+                        <!-- Name -->
                         <div class="ml-6">
-                            <h2 class="text-3xl font-bold">{{ user.email || 'Атыңыз' }}</h2>
+                            <h2 class="text-3xl font-bold">{{ user.name || 'Атыңыз' }}</h2>
                             <p class="text-gray-600 mt-1"></p>
                         </div>
                     </div>
 
                     <!-- Email info -->
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Сіз өз email поштаңызды көрсетпегенсіз
-                        </label>
                         <div class="flex items-center bg-gray-100 p-2 rounded-md">
                             <input type="checkbox" class="mr-2" />
                             <span>Жаңалықтарға жазылыңыз</span>
@@ -177,7 +195,7 @@
                             >
                             <input
                                 type="text"
-                                v-model="form.phone"
+                                v-model="form.phone_number"
                                 class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                                 placeholder="+7 777 777 77 77"
                             />
@@ -211,11 +229,13 @@
                     :class="{ 'opacity-100': showSection === 'groups', 'opacity-0 absolute': showSection !== 'groups' }"
                 >
                     <h2 class="text-3xl font-bold mb-6">Көмек керек топ</h2>
+                    <!-- Helps Section Table -->
                     <table
                         v-if="helps.length"
-                        class="w-full bg-white border border-gray-300 rounded-lg overflow-hidden"
+                        class="w-full min-w-[600px] bg-white border border-gray-300 rounded-lg overflow-x-auto text-sm md:text-base"
                     >
-                        <thead>
+
+                    <thead>
                         <tr class="bg-gray-100">
                             <th class="py-3 px-4 border-b">Имя</th>
                             <th class="py-3 px-4 border-b">Фамилия</th>
@@ -257,12 +277,14 @@ import axios from "axios";
 export default {
     data() {
         return {
+            showMenu: false, // жаңа toggle
             showSection: 'profile',
+            photoPreview: null,
             form: {
                 name: '',
                 surname: '',
                 gender: 'male',
-                phone: '',
+                phone_number: '',
                 city: 'almaty',
             },
             successMessage: '',
@@ -275,6 +297,7 @@ export default {
       try{
           const response = await axios.get('/user');
           this.user = response.data;
+          this.form = response.data;
       }  catch (er) {
         console.log("Қолданушының данныйын алу кезінде қателік туды.",er);
       }
@@ -283,19 +306,48 @@ export default {
     methods: {
         async submitProfile() {
             try {
-                const response = await axios.post('/profile', this.form);
+                const formData = new FormData();
+
+                // Форм өрістерін қосу
+                formData.append('name', this.form.name);
+                formData.append('surname', this.form.surname);
+                formData.append('gender', this.form.gender);
+                formData.append('phone_number', this.form.phone_number);
+                formData.append('city', this.form.city);
+
+                // Фото бар болса, оны да қосу
+                if (this.form.photo) {
+                    formData.append('photo', this.form.photo);
+                }
+
+                // POST сұраныс multipart/form-data ретінде
+                const response = await axios.post('/profile', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
                 this.successMessage = response.data.message;
-                // Сброс полей формы
-                this.form = {
-                    name: '',
-                    surname: '',
-                    gender: 'male',
-                    phone: '',
-                    city: 'almaty'
-                };
+
             } catch (e) {
-                console.error(e);
+                console.error('Профильді сақтау қатесі:', e);
             }
+        },
+        onPhotoChange(e) {
+            const file = e.target.files[0];
+            if (file) {
+                this.form.photo = file;
+
+                // preview жасау үшін қажет болса
+                const reader = new FileReader();
+                reader.onload = event => {
+                    this.photoPreview = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        triggerFileInput() {
+            this.$refs.photoInput.click();
         },
         createGroup() {
             this.$router.push('/create/group');

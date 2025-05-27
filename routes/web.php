@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\getHelpController;
@@ -22,7 +23,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/register',[RegisterController::class,'registerStore'])->name('registerStore');
-Route::post('/login',[LoginController::class,'loginStore'])->name('loginStore');
+//Route::post('/login',[LoginController::class,'loginStore'])->name('loginStore');
+Route::post('/login',[AuthController::class,'login'])->name('loginStore');
+
+
+Route::get('/test-login', function () {
+    $credentials = [
+        'email' => 'aaleuetdinov@gmail.com',
+        'password' => 'Zamira1975!' // Замени на реальный пароль
+    ];
+
+    if (Auth::attempt($credentials)) {
+        return 'Логин успешен!';
+    }
+
+    return 'Ошибка логина!';
+});
+
 
 Route::get('/group',[GroupController::class,'index'])->name('groups.index');
 Route::post('/create/group',[GroupController::class,'store'])->name('store.group');

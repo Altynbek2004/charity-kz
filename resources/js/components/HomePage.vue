@@ -546,6 +546,17 @@ export default {
         transform: scale(1);
     }
 
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+    }
+
+    .fade-in.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 
     .stat-card {
         opacity: 0;

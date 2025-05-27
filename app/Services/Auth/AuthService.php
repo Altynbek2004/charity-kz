@@ -11,7 +11,7 @@ class AuthService
 {
     public function register(array $data)
     {
-        return VerificationCode::create([
+        return User::create([
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

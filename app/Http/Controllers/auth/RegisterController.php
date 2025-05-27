@@ -4,6 +4,7 @@ namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationCodeMail;
+use App\Models\User;
 use App\Models\VerificationCode;
 use App\Services\Auth\AuthService;
 use Carbon\Carbon;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
 //        ]);
         $code = random_int(100000, 999999);
 
-        VerificationCode::updateOrCreate(
+        User::updateOrCreate(
             ['email' => $request->email],
             [
                 'code'       => (string) $code,
@@ -55,7 +56,7 @@ class RegisterController extends Controller
 //            'code'  => 'required|digits:6',
 //        ]);
 
-        $verification = VerificationCode::where('email', $request->email)->first();
+        $verification = User::where('email', $request->email)->first();
 
         if (! $verification) {
             return response()->json([

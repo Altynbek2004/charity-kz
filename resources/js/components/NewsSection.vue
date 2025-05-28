@@ -266,7 +266,7 @@ export default {
         this.fetchNews();
     },
     mounted() {
-        this.getUserData();
+      //  this.getUserData();
     },
     methods: {
         async getUserData() {

@@ -1,5 +1,9 @@
 <template>
     <div class="volunteer-service min-h-screen bg-gradient-to-br from-green-50 to-teal-100">
+
+        <!-- Navbar placeholder -->
+        <navbar/>
+
         <!-- Header Section -->
         <div class="bg-white shadow-sm">
             <div class="max-w-7xl mx-auto px-4 py-6">
@@ -208,8 +212,15 @@
 </template>
 
 <script>
+
+
+import Navbar from './Navbar.vue';
+
 export default {
     name: 'VolunteerService',
+    components: {
+        Navbar,
+    },
     data() {
         return {
             isSubmitting: false,

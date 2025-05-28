@@ -9,9 +9,9 @@
 
                 <!-- Navigation -->
                 <nav class="flex items-center space-x-8">
-                    <a href="#" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Басты бет</a>
-                    <a href="#" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Мәзір</a>
-                    <a href="#" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Көмек алу</a>
+                    <a href="/" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Басты бет</a>
+                    <a href="/" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Мәзір</a>
+                    <a href="/help" class="text-white hover:text-gray-200 cursor-pointer whitespace-nowrap">Көмек алу</a>
                 </nav>
             </div>
 

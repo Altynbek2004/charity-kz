@@ -22,6 +22,7 @@ if (authToken) {
 }
 
 // 🛡️ CSRF токен — Laravel үшін қажет
+
 const csrfTokenMeta = document.head.querySelector('meta[name="csrf-token"]');
 if (csrfTokenMeta) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfTokenMeta.content;

@@ -2,6 +2,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import ChatApp from './components/design/Chat.vue'
 // Импорт компонентов
 import NewsSection from './components/NewsSection.vue';
 import ContactForm from './components/ContactForm.vue';
@@ -54,6 +55,7 @@ createApp(App)
     .use(i18n)
     .component('contact-form', ContactForm)
     .component('news-section', NewsSection)
+    .component('chat-app', ChatApp)
     .mount('#app');
 
 

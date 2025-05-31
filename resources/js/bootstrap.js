@@ -8,18 +8,8 @@ import axios from 'axios';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import ChatApp from './components/design/Chat.vue'
 
-
-window.axios = axios;
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-// Axios-ты дұрыс конфигурациялау
-
-
-const authToken = localStorage.getItem('token');
-if (authToken) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
-}
 
 // 🛡️ CSRF токен — Laravel үшін қажет
 
@@ -33,6 +23,7 @@ if (csrfTokenMeta) {
 // Инициализация Vue и подключение маршрутизации
 const app = createApp(App);
 app.use(router);
+app.component('chat-app',ChatApp)
 app.mount('#app');
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

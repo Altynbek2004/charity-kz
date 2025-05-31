@@ -321,13 +321,14 @@ export default {
         },
         async submitLogin(){
             try{
-                const response = await axios.post('/login',{
+                const response = await axios.post('/api/login',{
                     email:this.email,
                     password: this.password
                 });
 
 
                 const token = response.data.token;
+                console.log(token);
                 this.isLoggedIn = true
                 // ✅ Сақтау
                 localStorage.setItem('token', token);

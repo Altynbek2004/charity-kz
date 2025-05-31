@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/login',[AuthController::class,'login'])->name('loginStore');
 Route::apiResource('products', ProductController::class);
 
 Route::prefix('v1')->group(function () {

@@ -13,6 +13,22 @@ import router from './router';
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+// Axios-ты дұрыс конфигурациялау
+
+
+const authToken = localStorage.getItem('token');
+if (authToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+}
+
+// 🛡️ CSRF токен — Laravel үшін қажет
+
+const csrfTokenMeta = document.head.querySelector('meta[name="csrf-token"]');
+if (csrfTokenMeta) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfTokenMeta.content;
+} else {
+    console.error('CSRF token not found');
+}
 
 // Инициализация Vue и подключение маршрутизации
 const app = createApp(App);

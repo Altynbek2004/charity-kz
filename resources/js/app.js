@@ -11,6 +11,7 @@ import en from '../locales/en.json';
 import kz from '../locales/kz.json';
 import ru from '../locales/ru.json';
 import {createI18n} from "vue-i18n";
+import axios from "axios";
 
 const i18n = createI18n({
     locale:'kz',
@@ -22,11 +23,28 @@ const i18n = createI18n({
     }
 })
 
-// Set axios defaults
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-const token = document.head.querySelector('meta[name="csrf-token"]');
-if (token) {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
+
+
+
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// Axios-ты дұрыс конфигурациялау
+
+
+const authToken = localStorage.getItem('token');
+if (authToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+}
+
+
+
+// 🛡️ CSRF токен — Laravel үшін қажет
+
+const csrfTokenMeta = document.head.querySelector('meta[name="csrf-token"]');
+if (csrfTokenMeta) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfTokenMeta.content;
 } else {
     console.error('CSRF token not found');
 }

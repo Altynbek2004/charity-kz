@@ -26,15 +26,23 @@
 
             <!-- Оң жақ: Actions -->
             <div class="flex items-center space-x-4">
-                <button class="text-gray-600 hover:text-green-500 transition-colors duration-300 whitespace-nowrap">En</button>
                 <button
                     class="bg-green-400 text-white px-5 py-2 rounded-full shadow-md hover:bg-green-500 transition-all duration-300 hover:scale-105 whitespace-nowrap animate-bounce-slow"
                 >
                     Байланыс
                 </button>
-                <button class="text-gray-600 hover:text-green-500 transition-transform duration-300 transform hover:rotate-12 whitespace-nowrap">
-                    <i class="fas fa-search"></i>
-                </button>
+                <!-- Тілдер -->
+                <div class="flex items-center gap-2">
+                    <button>
+                        <img @click="changeLanguage('kz')" src="https://flagcdn.com/w40/kz.png" alt="KZ" class="h-5 w-5 rounded-full" />
+                    </button>
+                    <button>
+                        <img @click="changeLanguage('en')" src="https://flagcdn.com/w40/gb.png" alt="EN" class="h-5 w-5 rounded-full" />
+                    </button>
+                    <button>
+                        <img @click="changeLanguage('ru')" src="https://flagcdn.com/w40/ru.png" alt="RU" class="h-5 w-5 rounded-full" />
+                    </button>
+                </div>
             </div>
 
         </div>
@@ -43,8 +51,15 @@
 
 <script>
 export default {
-    name: "Navbar"
+    name: "Navbar",
+
+    methods: {
+        changeLanguage(lang){
+            this.$i18n.locale = lang;
+        },
+    }
 }
+
 </script>
 
 <style scoped>

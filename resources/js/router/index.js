@@ -13,6 +13,10 @@ import GiveHelp from "../components/GiveHelp.vue";
 import ContactForm from '../components/ContactForm.vue';
 import CharityHelp from "../components/design/CharityHelp.vue";
 import VolunteerService from '../components/design/VolunteerService.vue';
+import Donate from '../components/design/Donate.vue';
+import notFound from '../components/design/notFound.vue';
+import AboutUsSection from '../components/design/AboutUsSection.vue';
+import AboutUs from '../components/design/AboutUs.vue';
 
 const routes = [
     {
@@ -72,6 +76,22 @@ const routes = [
     {
         path: '/volunteer-service',
         component:VolunteerService
+    } ,
+    {
+        path: '/donate',
+        component:Donate
+    } ,
+    {
+        path: '/not-found',
+        component:notFound
+    },
+    {
+        path: '/about-us-section',
+        component:AboutUsSection
+    },
+    {
+        path: '/about-us',
+        component:AboutUs
     }
 ];
 

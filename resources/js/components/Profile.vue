@@ -1,7 +1,10 @@
 <template>
+    <navbar/>
     <!-- Container -->
     <div class="bg-gray-100 py-10 min-h-screen flex justify-center items-start px-4 sm:px-6">
+
         <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
+
 
             <button
                 class="md:hidden fixed top-4 left-4 z-50 bg-green-800 text-white p-2 rounded focus:outline-none"
@@ -78,7 +81,7 @@
                     </li>
                     <li>
                         <button
-                            @click="createGroup"
+                            @click="showSection = 'createGroup'"
                             class="w-full text-left hover:text-green-300 transition-all"
                         >
                             Көмек керек топты құру
@@ -475,6 +478,15 @@
                     </div>
                 </section>
 
+                <!-- Create Groups Section -->
+                <section
+                    v-show="showSection === 'createGroup'"
+                    class="transition-opacity duration-300"
+                    :class="{ 'opacity-100': showSection === 'createGroup', 'opacity-0 absolute': showSection !== 'createGroup' }"
+                >
+                    <charity-group/>
+                </section>
+
                 <!-- Helps Section -->
                 <section
                     v-show="showSection === 'groups'"
@@ -490,28 +502,24 @@
 
                         <thead>
                         <tr class="bg-gray-100">
-                            <th class="py-3 px-4 border-b">Имя</th>
-                            <th class="py-3 px-4 border-b">Фамилия</th>
-                            <th class="py-3 px-4 border-b">Номер телефона</th>
-                            <th class="py-3 px-4 border-b">Электронная почта</th>
-                            <th class="py-3 px-4 border-b">Информация</th>
+                            <th class="py-3 px-4 border-b">Имя группы</th>
+                            <th class="py-3 px-4 border-b">Тема</th>
+                            <th class="py-3 px-4 border-b">Описание</th>
                             <th class="py-3 px-4 border-b">Документы, файлы, изображение</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="help in helps" :key="help.id" class="hover:bg-gray-50">
                             <td class="py-3 px-4 border-b">{{ help.name }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.surname }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.number }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.email }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.info }}</td>
+                            <td class="py-3 px-4 border-b">{{ help.title  }}</td>
+                            <td class="py-3 px-4 border-b">{{ help.description  }}</td>
                             <td class="py-3 px-4 border-b">
                                 <a
-                                    :href="`/${help.file}`"
+                                    :href="`/${help.image}`"
                                     target="_blank"
                                     class="text-blue-500 underline"
                                 >
-                                    {{ help.file.split('/').pop() }}
+                                    {{ help.image.split('/').pop() }}
                                 </a>
                             </td>
 
@@ -527,7 +535,12 @@
 
 <script>
 import axios from "axios";
+import Navbar from './design/Navbar.vue';
+import CharityGroup from './CharityGroup.vue';
 export default {
+    components: {
+        CharityGroup,Navbar
+    },
     data() {
         return {
             showMenu: false,
@@ -719,7 +732,7 @@ export default {
         async listGroupHelp() {
             this.showSection = 'groups';
             try {
-                const response = await axios.get('/get-helps');
+                const response = await axios.get('/group');
                 this.helps = response.data;
             } catch (error) {
                 console.error("Деректерді алу кезінде қате:", error);

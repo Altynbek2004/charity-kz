@@ -2,27 +2,27 @@
     <section class="py-16 px-4 md:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold">{{ $t('news') }}</h2>
+                <h2 class="text-4xl font-extrabold text-green-600 animate-fade-in-down">{{ $t('news') }}</h2>
                 <div class="flex gap-2 items-center">
-                    <!-- Кнопка добавления новостей -->
+                    <!-- Add News Button -->
                     <button
                         @click="openModal"
-                        class="bg-green-500 hover:bg-green-600 text-white font-medium rounded-md px-4 py-2 flex items-center gap-2"
+                        class="bg-green-500 hover:bg-green-600 transition duration-300 text-white font-semibold rounded-xl px-5 py-2 flex items-center gap-2 shadow-md hover:scale-105 transform"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-pulse" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
                         {{ $t('add_news') }}
                     </button>
-                    <button @click="back()" class="bg-green-50 hover:bg-green-100 rounded-full p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    <button @click="back()" class="bg-green-100 hover:bg-green-200 rounded-full p-3 transition transform hover:rotate-[-10deg]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </button>
-                    <button @click="front()" class="bg-green-50 hover:bg-green-100 rounded-full p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    <button @click="front()" class="bg-green-100 hover:bg-green-200 rounded-full p-3 transition transform hover:rotate-[10deg]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
@@ -30,25 +30,24 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- News Items -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div
                     v-for="newsItem in news"
                     :key="newsItem.id"
-                    class="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-100 transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg news-card"
+                    class="bg-white shadow-xl rounded-xl overflow-hidden border border-green-100 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group"
                 >
-                    <div class="h-56 bg-gray-200 relative">
+                    <div class="h-56 bg-gray-200 relative overflow-hidden">
                         <img
                             v-if="newsItem.image_url"
                             :src="newsItem.image_url"
                             :alt="newsItem.title"
-                            class="w-full h-full object-cover"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-8 text-gray-500 text-sm mb-3">
                             <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -56,7 +55,7 @@
                                 <span>{{ newsItem.author }}</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -65,46 +64,40 @@
                             </div>
                         </div>
 
-                        <h3 class="text-xl font-bold mb-3">{{ newsItem.title }}</h3>
-                        <p class="text-gray-600 mb-4">
-                            {{ truncateText(newsItem.content, 120) }}
-                        </p>
+                        <h3 class="text-xl font-bold text-green-700 mb-2 group-hover:text-green-600 transition-colors">{{ newsItem.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ truncateText(newsItem.content, 120) }}</p>
 
-                        <div class="flex justify-items-end gap-4 mt-4">
-                            <!-- Read More button -->
+                        <div class="flex justify-start gap-4 mt-4">
                             <button
                                 @click="readMore(newsItem)"
-                                class="border border-green-500 text-green-500 bg-white hover:bg-green-500 hover:text-white px-6 py-2 rounded transition-colors duration-200"
+                                class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white px-5 py-2 rounded-full transition duration-200"
                             >
                                 {{ $t('read_more') }}
                             </button>
-
-                            <!-- Delete button -->
                             <button
                                 @click="deleteNews(newsItem.id)"
-                                class="border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white p-2 rounded-full transition-colors duration-200"
-                                title="Удалить"
+                                class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white p-2 rounded-full transition duration-200"
+                                title="Delete"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M6 18L18 6M6 6l12 12"/>
                                 </svg>
                             </button>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Модальное окно добавления новости -->
+        <!-- Modal -->
         <div v-if="showModal"
-             class="fixed inset-0 backdrop-blur-sm bg-transparent flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-screen overflow-y-auto">
+             class="fixed inset-0 z-50  bg-opacity-40 backdrop-blur-sm flex items-center justify-center px-4 py-8 animate-fade-in">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-y-auto animate-slide-up">
                 <div class="flex justify-between items-center border-b border-gray-200 px-6 py-4">
-                    <h3 class="text-xl font-bold">{{ $t('add_news') }}</h3>
-                    <button @click="closeModal" class="text-gray-400 hover:text-gray-600">
+                    <h3 class="text-2xl font-bold text-green-600">{{ $t('add_news') }}</h3>
+                    <button @click="closeModal" class="text-gray-400 hover:text-gray-600 transition transform hover:rotate-90">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,105 +106,70 @@
                     </button>
                 </div>
 
-                <form @submit.prevent="submitNews" class="p-6">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                            {{ $t('title') }}
-                        </label>
-                        <input
-                            v-model="form.title"
-                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="title"
-                            type="text"
-                            required
-                        >
-                        <p v-if="errors.title" class="text-red-500 text-xs mt-1">{{ errors.title[0] }}</p>
+                <form @submit.prevent="submitNews" class="p-6 space-y-6">
+                    <!-- Title -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1" for="title">{{ $t('title') }}</label>
+                        <input v-model="form.title" id="title" type="text"
+                               class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <p v-if="errors.title" class="text-red-500 text-sm">{{ errors.title[0] }}</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="author">
-                            {{ $t('author') }}
-                        </label>
-                        <input
-                            v-model="form.author"
-                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="author"
-                            type="text"
-                            required
-                        >
-                        <p v-if="errors.author" class="text-red-500 text-xs mt-1">{{ errors.author[0] }}</p>
+                    <!-- Author -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1" for="author">{{ $t('author') }}</label>
+                        <input v-model="form.author" id="author" type="text"
+                               class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <p v-if="errors.author" class="text-red-500 text-sm">{{ errors.author[0] }}</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="content">
-                            {{ $t('content') }}
-                        </label>
-                        <textarea
-                            v-model="form.content"
-                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="content"
-                            rows="6"
-                            required
-                        ></textarea>
-                        <p v-if="errors.content" class="text-red-500 text-xs mt-1">{{ errors.content[0] }}</p>
+                    <!-- Content -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1" for="content">{{ $t('content') }}</label>
+                        <textarea v-model="form.content" id="content" rows="6"
+                                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+                        <p v-if="errors.content" class="text-red-500 text-sm">{{ errors.content[0] }}</p>
                     </div>
 
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
-                            {{ $t('image') }}
-                        </label>
-                        <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                            <input
-                                @change="handleImageUpload"
-                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                type="file"
-                                id="image"
-                                accept="image/*"
-                            >
-                            <div v-if="!form.image" class="space-y-1 text-center">
+                    <!-- Image -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-1" for="image">{{ $t('image') }}</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center relative">
+                            <input @change="handleImageUpload" id="image" type="file" accept="image/*"
+                                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            <div v-if="!form.image" class="space-y-1">
                                 <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                      fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
-                                <p class="text-sm text-gray-600">{{ $t('drag_and_drop') }}</p>
-                                <p class="text-xs text-gray-500">PNG, JPG, GIF до 5MB</p>
+                                <p class="text-sm text-gray-500">{{ $t('drag_and_drop') }}</p>
                             </div>
-                            <div v-else class="text-center">
-                                <img
-                                    :src="previewImage"
-                                    class="mx-auto h-32 object-cover rounded"
-                                    :alt="form.title"
-                                >
-                                <p class="mt-2 text-sm text-gray-600">{{ form.image.name }}</p>
+                            <div v-else>
+                                <img :src="previewImage" class="mx-auto h-32 object-cover rounded">
+                                <p class="text-sm mt-2 text-gray-700">{{ form.image.name }}</p>
                             </div>
                         </div>
-                        <p v-if="errors.image" class="text-red-500 text-xs mt-1">{{ errors.image[0] }}</p>
+                        <p v-if="errors.image" class="text-red-500 text-sm">{{ errors.image[0] }}</p>
                     </div>
 
-                    <div class="flex items-center justify-end space-x-4">
-                        <button
-                            type="button"
-                            @click="closeModal"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded"
-                        >
+                    <!-- Buttons -->
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" @click="closeModal"
+                                class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-lg">
                             {{ $t('cancel') }}
                         </button>
-                        <button
-                            type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded"
-                            :disabled="loading"
-                        >
-              <span v-if="loading" class="flex items-center">
-                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                     viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                {{ $t('saving') }}
-              </span>
-                            <span v-else>{{ $t('save') }}</span>
+                        <button type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-lg transition duration-200 flex items-center gap-2"
+                                :disabled="loading">
+                            <svg v-if="loading" class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                            </svg>
+                            <span>{{ $t('add') }}</span>
                         </button>
                     </div>
                 </form>
@@ -236,6 +194,7 @@
 
     </section>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -266,7 +225,7 @@ export default {
         this.fetchNews();
     },
     mounted() {
-        this.getUserData();
+      //  this.getUserData();
     },
     methods: {
         async getUserData() {

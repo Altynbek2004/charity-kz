@@ -2,23 +2,26 @@
     <navbar/>
     <!-- Container -->
     <div class="bg-gray-100 py-10 min-h-screen flex justify-center items-start px-4 sm:px-6">
-
         <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
 
 
             <button
-                class="md:hidden fixed top-4 left-4 z-50 bg-green-800 text-white p-2 rounded focus:outline-none"
+                class="md:hidden fixed top-4 left-4 z-50 bg-green-100 text-green-900 p-3 rounded-full shadow-lg
+         hover:bg-green-200 focus:outline-none focus:ring-4 focus:ring-green-300
+         transition duration-300 ease-in-out transform hover:scale-110 active:scale-95"
                 @click="showMenu = !showMenu"
             >
                 <!-- Иконка: бургер -->
                 <svg v-if="!showMenu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     :class="{'animate-fade-in-down': !showMenu}">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
                 <!-- Иконка: крестик -->
                 <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     :class="{'animate-fade-in-up': showMenu}">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M6 18L18 6M6 6l12 12"/>
                 </svg>
@@ -27,18 +30,20 @@
             <!-- Sidebar -->
             <aside
                 :class="[
-        'bg-green-900 text-white p-6 fixed md:static top-0 left-0 h-full z-40 transform transition-transform duration-300 ease-in-out mt-16',
-        showMenu ? 'translate-x-0 w-3/4 sm:w-2/4' : '-translate-x-full',
-        'md:translate-x-0 md:w-1/4 md:block mt-0'
-    ]"
+    'bg-gradient-to-b from-green-50 to-green-100 text-green-900 p-8 fixed md:static top-0 left-0 h-full z-40 transform transition-transform duration-500 ease-in-out mt-16 rounded-r-xl shadow-xl',
+    showMenu ? 'translate-x-0 w-3/4 sm:w-2/4' : '-translate-x-full',
+    'md:translate-x-0 md:w-1/4 md:block mt-0'
+  ]"
             >
-                <h2 class="text-2xl ml-8 font-bold mb-6">Мәзір</h2>
-                <ul class="space-y-4">
+                <h2 class="text-3xl ml-8 font-extrabold mb-8 tracking-wide drop-shadow-md text-green-700 animate-pulse">
+                    Мәзір
+                </h2>
+                <ul class="space-y-6">
                     <li>
                         <button
                             @click="showSection = 'profile'"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'profile' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'profile' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Менің профилім
                         </button>
@@ -46,8 +51,8 @@
                     <li>
                         <button
                             @click="showSection = 'achievements'"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'achievements' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'achievements' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Менің жетістіктерім
                         </button>
@@ -55,8 +60,8 @@
                     <li>
                         <button
                             @click="showSection = 'donations'"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'donations' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'donations' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Қайырымдылық тарихы
                         </button>
@@ -64,8 +69,8 @@
                     <li>
                         <button
                             @click="showSection = 'subscriptions'"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'subscriptions' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'subscriptions' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Менің жазылмаларым
                         </button>
@@ -73,8 +78,8 @@
                     <li>
                         <button
                             @click="showSection = 'cards'"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'cards' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'cards' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Менің карталарым
                         </button>
@@ -82,7 +87,7 @@
                     <li>
                         <button
                             @click="showSection = 'createGroup'"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            class="w-full text-left hover:text-green-500 transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Көмек керек топты құру
                         </button>
@@ -90,8 +95,8 @@
                     <li>
                         <button
                             @click="listGroupHelp"
-                            :class="{ 'text-green-300 font-semibold': showSection === 'groups' }"
-                            class="w-full text-left hover:text-green-300 transition-all"
+                            :class="showSection === 'groups' ? 'text-green-600 font-bold underline decoration-green-400 underline-offset-4' : 'hover:text-green-500'"
+                            class="w-full text-left transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             Көмек керек топ
                         </button>
@@ -99,7 +104,7 @@
                     <li>
                         <button
                             @click="logout"
-                            class="w-full text-left hover:text-red-400 transition-all"
+                            class="w-full text-left hover:text-red-500 transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95"
                         >
                             Аккаунттан шығу
                         </button>
@@ -107,118 +112,142 @@
                 </ul>
             </aside>
 
+
             <!-- Main Content -->
             <main class="w-full md:w-3/4 p-6 sm:p-10 bg-gray-50">
                 <!-- Profile Section -->
                 <section
                     v-show="showSection === 'profile'"
-                    class="transition-opacity duration-300"
-                    :class="{ 'opacity-100': showSection === 'profile', 'opacity-0 absolute': showSection !== 'profile' }"
+                    class="transition-opacity duration-500 ease-in-out"
+                    :class="{ 'opacity-100 relative z-20': showSection === 'profile', 'opacity-0 absolute -z-10': showSection !== 'profile' }"
                 >
                     <!-- Profile photo -->
-                    <div class="flex items-center mb-8">
+                    <div class="flex items-center mb-10">
                         <!-- Avatar -->
-                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-300 flex items-center justify-center relative overflow-hidden cursor-pointer" @click="triggerFileInput">
-
-                            <img :src="user.photo_url || photoPreview " />
-
-
-
-                            <div class="absolute bottom-0 right-0 bg-orange-400 p-1 rounded-full text-white">📷</div>
-                            <input type="file" @change="onPhotoChange" accept="image/*" class="hidden" ref="photoInput">
+                        <div
+                            class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-green-100 via-green-200 to-green-50 flex items-center justify-center relative overflow-hidden cursor-pointer shadow-lg ring-4 ring-green-300 hover:ring-green-400 transition-all duration-400 animate-pulse-slow"
+                            @click="triggerFileInput"
+                            title="Суретті өзгерту"
+                        >
+                            <img
+                                :src="user.photo_url || photoPreview"
+                                alt="User Avatar"
+                                class="object-cover w-full h-full rounded-full transform hover:scale-105 transition-transform duration-500"
+                            />
+                            <div
+                                class="absolute bottom-1 right-1 bg-green-600 hover:bg-green-700 p-2 rounded-full text-white shadow-lg text-xl select-none"
+                            >
+                                📷
+                            </div>
+                            <input type="file" @change="onPhotoChange" accept="image/*" class="hidden" ref="photoInput" />
                         </div>
 
                         <!-- Name -->
-                        <div class="ml-6">
-                            <h2 class="text-3xl font-bold">{{ user.name || 'Атыңыз' }}</h2>
-                            <p class="text-gray-600 mt-1"></p>
+                        <div class="ml-8">
+                            <h2 class="text-4xl font-extrabold text-green-900 drop-shadow-md select-text">
+                                {{ user.name || 'Атыңыз' }}
+                            </h2>
+                            <p class="text-green-700 mt-1 italic select-text">Жеке профиль ақпараттарыңыз</p>
                         </div>
                     </div>
 
                     <!-- Email info -->
-                    <div class="mb-6">
-                        <div class="flex items-center bg-gray-100 p-2 rounded-md">
-                            <input type="checkbox" class="mr-2" />
-                            <span>Жаңалықтарға жазылыңыз</span>
-                        </div>
+                    <div class="mb-8">
+                        <label
+                            class="flex items-center bg-green-50 border border-green-200 rounded-lg p-3 cursor-pointer hover:bg-green-100 transition"
+                        >
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-green-600 focus:ring-green-400 rounded transition" />
+                            <span class="text-green-900 font-medium select-none">Жаңалықтарға жазылыңыз</span>
+                        </label>
                     </div>
 
                     <!-- Donation info -->
-                    <div class="bg-green-800 text-white py-4 px-6 rounded-md text-lg font-semibold mb-6">
-                        Сіздің үлесіңіз: <span class="ml-2 font-bold">{{ totalDonated }} ₸</span>
+                    <div
+                        class="bg-gradient-to-r from-green-400 to-green-600 text-white py-5 px-7 rounded-xl text-xl font-semibold shadow-lg mb-8 flex justify-center items-center space-x-2 select-text"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-7 w-7 animate-bounce"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 1.343-3 3 0 1.35 1.58 3.5 3 4 1.42-.5 3-2.65 3-4 0-1.657-1.343-3-3-3z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 12v6" />
+                        </svg>
+                        <span>Сіздің үлесіңіз: <span class="ml-2 font-bold">{{ totalDonated }} ₸</span></span>
                     </div>
 
                     <!-- Success message -->
-                    <div
-                        v-if="successMessage"
-                        class="bg-green-100 text-green-700 p-4 rounded-lg mb-4"
-                    >
-                        {{ successMessage }}
-                    </div>
+                    <transition name="fade" mode="out-in">
+                        <div
+                            v-if="successMessage"
+                            key="success-msg"
+                            class="bg-green-100 border border-green-400 text-green-800 p-4 rounded-lg mb-6 shadow-md select-text"
+                        >
+                            {{ successMessage }}
+                        </div>
+                    </transition>
 
                     <!-- Profile form -->
                     <form @submit.prevent="submitProfile" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700"
-                            >Есіміңіз</label
-                            >
+                            <label class="block text-green-900 text-lg font-semibold select-none">Есіміңіз</label>
                             <input
                                 type="text"
                                 v-model="form.name"
-                                class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                                 placeholder="Атыңызды енгізіңіз"
+                                class="mt-2 w-full border border-green-300 rounded-xl shadow-md p-4 focus:outline-none focus:ring-4 focus:ring-green-400 transition duration-300 placeholder-green-400 text-green-900 font-medium"
                             />
                         </div>
+
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700"
-                            >Тегіңіз</label
-                            >
+                            <label class="block text-green-900 text-lg font-semibold select-none">Тегіңіз</label>
                             <input
                                 type="text"
                                 v-model="form.surname"
-                                class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                                 placeholder="Тегіңізді енгізіңіз"
+                                class="mt-2 w-full border border-green-300 rounded-xl shadow-md p-4 focus:outline-none focus:ring-4 focus:ring-green-400 transition duration-300 placeholder-green-400 text-green-900 font-medium"
                             />
                         </div>
+
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700"
-                            >Жынысыңыз</label
-                            >
+                            <label class="block text-green-900 text-lg font-semibold select-none">Жынысыңыз</label>
                             <select
                                 v-model="form.gender"
-                                class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                class="mt-2 w-full border border-green-300 rounded-xl shadow-md p-4 focus:outline-none focus:ring-4 focus:ring-green-400 transition duration-300 text-green-900 font-medium"
                             >
                                 <option value="female">Әйел адам</option>
                                 <option value="male">Ер адам</option>
                             </select>
                         </div>
+
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700"
-                            >Телефон нөміріңіз</label
-                            >
+                            <label class="block text-green-900 text-lg font-semibold select-none">Телефон нөміріңіз</label>
                             <input
                                 type="text"
                                 v-model="form.phone_number"
-                                class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                                 placeholder="+7 777 777 77 77"
+                                class="mt-2 w-full border border-green-300 rounded-xl shadow-md p-4 focus:outline-none focus:ring-4 focus:ring-green-400 transition duration-300 placeholder-green-400 text-green-900 font-medium"
                             />
                         </div>
+
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700"
-                            >Қалаңыз</label
-                            >
+                            <label class="block text-green-900 text-lg font-semibold select-none">Қалаңыз</label>
                             <select
                                 v-model="form.city"
-                                class="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                class="mt-2 w-full border border-green-300 rounded-xl shadow-md p-4 focus:outline-none focus:ring-4 focus:ring-green-400 transition duration-300 text-green-900 font-medium"
                             >
                                 <option value="almaty">Алматы</option>
                                 <option value="astana">Астана</option>
                                 <option value="shymkent">Шымкент</option>
                             </select>
                         </div>
+
                         <button
                             type="submit"
-                            class="w-full bg-green-800 text-white py-3 rounded-lg hover:bg-green-700 transition"
+                            class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-4 rounded-xl shadow-lg font-extrabold text-lg transform hover:scale-105 transition-transform duration-300"
                         >
                             Сақтау
                         </button>
@@ -228,36 +257,55 @@
                 <!-- Achievements Section -->
                 <section
                     v-show="showSection === 'achievements'"
-                    class="transition-opacity duration-300"
+                    class="transition-opacity duration-500 ease-in-out"
                     :class="{ 'opacity-100': showSection === 'achievements', 'opacity-0 absolute': showSection !== 'achievements' }"
                 >
-                    <h2 class="text-3xl font-bold mb-6">Менің жетістіктерім</h2>
+                    <h2
+                        class="text-3xl font-extrabold mb-8 text-green-700 drop-shadow-lg tracking-wide animate-fadeInDown"
+                    >
+                        Менің жетістіктерім
+                    </h2>
 
                     <!-- Achievement Stats -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-green-600 text-white p-6 rounded-lg text-center">
-                            <h3 class="text-2xl font-bold">{{ achievements.totalDonations }}</h3>
-                            <p class="text-green-200">Барлық ауыстырулар</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                        <div
+                            class="bg-gradient-to-tr from-green-100 to-green-300 text-green-900 p-8 rounded-xl text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 ease-in-out animate-pulse-slow"
+                        >
+                            <h3 class="text-4xl font-bold mb-2 drop-shadow-md">{{ achievements.totalDonations }}</h3>
+                            <p class="text-green-800 font-medium">Барлық ауыстырулар</p>
                         </div>
-                        <div class="bg-blue-600 text-white p-6 rounded-lg text-center">
-                            <h3 class="text-2xl font-bold">{{ achievements.helpedProjects }}</h3>
-                            <p class="text-blue-200">Көмектескен жобалар</p>
+                        <div
+                            class="bg-gradient-to-tr from-green-100 to-green-300 text-green-900 p-8 rounded-xl text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 ease-in-out animate-pulse-slow delay-150"
+                        >
+                            <h3 class="text-4xl font-bold mb-2 drop-shadow-md">{{ achievements.helpedProjects }}</h3>
+                            <p class="text-green-800 font-medium">Көмектескен жобалар</p>
                         </div>
-                        <div class="bg-purple-600 text-white p-6 rounded-lg text-center">
-                            <h3 class="text-2xl font-bold">{{ achievements.volunteeredHours }}</h3>
-                            <p class="text-purple-200">Волонтерлік сағаттар</p>
+                        <div
+                            class="bg-gradient-to-tr from-green-100 to-green-300 text-green-900 p-8 rounded-xl text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 ease-in-out animate-pulse-slow delay-300"
+                        >
+                            <h3 class="text-4xl font-bold mb-2 drop-shadow-md">{{ achievements.volunteeredHours }}</h3>
+                            <p class="text-green-800 font-medium">Волонтерлік сағаттар</p>
                         </div>
                     </div>
 
                     <!-- Badges -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold mb-4">Алған белгілеріңіз</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div v-for="badge in achievements.badges" :key="badge.id"
-                                 class="text-center p-4 border rounded-lg hover:shadow-md transition-shadow">
-                                <div class="text-4xl mb-2">{{ badge.icon }}</div>
-                                <h4 class="font-semibold">{{ badge.name }}</h4>
-                                <p class="text-sm text-gray-600">{{ badge.description }}</p>
+                    <div
+                        class="bg-white p-8 rounded-xl shadow-xl animate-fadeInUp"
+                    >
+                        <h3 class="text-xl font-semibold mb-6 text-green-700 border-b-2 border-green-300 pb-2">
+                            Алған белгілеріңіз
+                        </h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div
+                                v-for="badge in achievements.badges"
+                                :key="badge.id"
+                                class="text-center p-5 border border-green-200 rounded-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer bg-green-50"
+                            >
+                                <div class="text-5xl mb-3 text-green-600 animate-bounce">{{
+                                        badge.icon
+                                    }}</div>
+                                <h4 class="font-semibold text-green-800">{{ badge.name }}</h4>
+                                <p class="text-sm text-green-600 mt-1">{{ badge.description }}</p>
                             </div>
                         </div>
                     </div>
@@ -266,61 +314,84 @@
                 <!-- Donations History Section -->
                 <section
                     v-show="showSection === 'donations'"
-                    class="transition-opacity duration-300"
+                    class="transition-opacity duration-500 ease-in-out"
                     :class="{ 'opacity-100': showSection === 'donations', 'opacity-0 absolute': showSection !== 'donations' }"
                 >
-                    <h2 class="text-3xl font-bold mb-6">Қайырымдылық тарихы</h2>
+                    <h2
+                        class="text-3xl font-extrabold mb-8 text-green-700 drop-shadow-lg tracking-wide animate-fadeInDown"
+                    >
+                        Қайырымдылық тарихы
+                    </h2>
 
                     <!-- Filter Options -->
-                    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-                        <div class="flex flex-wrap gap-4">
-                            <select v-model="donationFilter.period" class="border border-gray-300 rounded-lg p-2">
-                                <option value="all">Барлық уақыт</option>
-                                <option value="month">Осы ай</option>
-                                <option value="year">Осы жыл</option>
-                            </select>
-                            <select v-model="donationFilter.type" class="border border-gray-300 rounded-lg p-2">
-                                <option value="all">Барлық түрлері</option>
-                                <option value="money">Ақшалай</option>
-                                <option value="goods">Тауарлар</option>
-                                <option value="time">Уақыт</option>
-                            </select>
-                        </div>
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-lg mb-8 flex flex-wrap gap-4 items-center animate-fadeInUp"
+                    >
+                        <select
+                            v-model="donationFilter.period"
+                            class="border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                        >
+                            <option value="all">Барлық уақыт</option>
+                            <option value="month">Осы ай</option>
+                            <option value="year">Осы жыл</option>
+                        </select>
+                        <select
+                            v-model="donationFilter.type"
+                            class="border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                        >
+                            <option value="all">Барлық түрлері</option>
+                            <option value="money">Ақшалай</option>
+                            <option value="goods">Тауарлар</option>
+                            <option value="time">Уақыт</option>
+                        </select>
                     </div>
 
                     <!-- Donations Table -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <table class="w-full">
-                            <thead class="bg-gray-100">
+                    <div
+                        class="bg-white rounded-xl shadow-xl overflow-hidden animate-fadeInUp"
+                    >
+                        <table class="w-full text-left">
+                            <thead class="bg-green-100 text-green-800 uppercase font-semibold tracking-wide">
                             <tr>
-                                <th class="py-3 px-4 text-left">Күні</th>
-                                <th class="py-3 px-4 text-left">Жоба</th>
-                                <th class="py-3 px-4 text-left">Түрі</th>
-                                <th class="py-3 px-4 text-left">Сомасы</th>
-                                <th class="py-3 px-4 text-left">Статус</th>
+                                <th class="py-4 px-6 border-b border-green-200">Күні</th>
+                                <th class="py-4 px-6 border-b border-green-200">Жоба</th>
+                                <th class="py-4 px-6 border-b border-green-200">Түрі</th>
+                                <th class="py-4 px-6 border-b border-green-200">Сомасы</th>
+                                <th class="py-4 px-6 border-b border-green-200">Статус</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="donation in filteredDonations" :key="donation.id" class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">{{ formatDate(donation.date) }}</td>
-                                <td class="py-3 px-4">{{ donation.project }}</td>
-                                <td class="py-3 px-4">
-                                        <span class="px-2 py-1 rounded-full text-xs"
-                                              :class="getDonationTypeClass(donation.type)">
-                                            {{ getDonationTypeName(donation.type) }}
-                                        </span>
+                            <tr
+                                v-for="donation in filteredDonations"
+                                :key="donation.id"
+                                class="border-b border-green-100 hover:bg-green-50 transition-colors duration-300"
+                            >
+                                <td class="py-3 px-6">{{ formatDate(donation.date) }}</td>
+                                <td class="py-3 px-6">{{ donation.project }}</td>
+                                <td class="py-3 px-6">
+            <span
+                class="px-3 py-1 rounded-full text-xs font-semibold"
+                :class="getDonationTypeClass(donation.type) + ' bg-green-100 text-green-700'"
+            >
+              {{ getDonationTypeName(donation.type) }}
+            </span>
                                 </td>
-                                <td class="py-3 px-4 font-semibold">{{ donation.amount }} {{ donation.currency }}</td>
-                                <td class="py-3 px-4">
-                                        <span class="px-2 py-1 rounded-full text-xs"
-                                              :class="getStatusClass(donation.status)">
-                                            {{ getStatusName(donation.status) }}
-                                        </span>
+                                <td class="py-3 px-6 font-semibold">{{ donation.amount }} {{ donation.currency }}</td>
+                                <td class="py-3 px-6">
+            <span
+                class="px-3 py-1 rounded-full text-xs font-semibold"
+                :class="getStatusClass(donation.status) + ' bg-green-100 text-green-700'"
+            >
+              {{ getStatusName(donation.status) }}
+            </span>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <div v-if="!filteredDonations.length" class="p-8 text-center text-gray-500">
+                        <div
+                            v-if="!filteredDonations.length"
+                            class="p-10 text-center text-green-400 font-semibold animate-fadeIn"
+                        >
                             Қайырымдылық тарихы табылмады
                         </div>
                     </div>
@@ -329,61 +400,83 @@
                 <!-- Subscriptions Section -->
                 <section
                     v-show="showSection === 'subscriptions'"
-                    class="transition-opacity duration-300"
+                    class="transition-opacity duration-500 ease-in-out"
                     :class="{ 'opacity-100': showSection === 'subscriptions', 'opacity-0 absolute': showSection !== 'subscriptions' }"
                 >
-                    <h2 class="text-3xl font-bold mb-6">Менің жазылмаларым</h2>
+                    <h2 class="text-3xl font-extrabold mb-8 text-green-700 tracking-wide animate-fadeInDown">
+                        Менің жазылмаларым
+                    </h2>
 
                     <!-- Active Subscriptions -->
-                    <div class="mb-8">
-                        <h3 class="text-xl font-semibold mb-4">Белсенді жазылмалар</h3>
-                        <div class="space-y-4">
-                            <div v-for="subscription in activeSubscriptions" :key="subscription.id"
-                                 class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+                    <div class="mb-10">
+                        <h3 class="text-xl font-semibold mb-6 text-green-600 border-b border-green-300 pb-2 animate-fadeInLeft">
+                            Белсенді жазылмалар
+                        </h3>
+                        <div class="space-y-6">
+                            <div
+                                v-for="subscription in activeSubscriptions"
+                                :key="subscription.id"
+                                class="bg-white p-6 rounded-xl shadow-lg flex justify-between items-center border-2 border-green-200 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 animate-popIn"
+                            >
                                 <div>
-                                    <h4 class="font-semibold text-lg">{{ subscription.project }}</h4>
-                                    <p class="text-gray-600">{{ subscription.description }}</p>
-                                    <p class="text-sm text-gray-500 mt-2">
+                                    <h4 class="font-semibold text-lg text-green-800">{{ subscription.project }}</h4>
+                                    <p class="text-green-700/80">{{ subscription.description }}</p>
+                                    <p class="text-sm text-green-500 mt-2 italic">
                                         Келесі төлем: {{ formatDate(subscription.nextPayment) }}
                                     </p>
                                 </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-green-600">{{ subscription.amount }} ₸/ай</p>
-                                    <button @click="cancelSubscription(subscription.id)"
-                                            class="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                                <div class="text-right flex flex-col items-end space-y-2">
+                                    <p class="font-extrabold text-green-700 text-lg animate-pulse">
+                                        {{ subscription.amount }} ₸/ай
+                                    </p>
+                                    <button
+                                        @click="cancelSubscription(subscription.id)"
+                                        class="mt-2 px-5 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 active:scale-95 transform transition"
+                                    >
                                         Тоқтату
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div v-if="!activeSubscriptions.length" class="text-gray-500 text-center py-8">
+                        <div v-if="!activeSubscriptions.length" class="text-green-400 text-center py-12 italic select-none animate-fadeIn">
                             Белсенді жазылмалар жоқ
                         </div>
                     </div>
 
                     <!-- Newsletter Subscriptions -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold mb-4">Жаңалықтар мен хабарландырулар</h3>
-                        <div class="space-y-3">
-                            <label class="flex items-center">
-                                <input type="checkbox" v-model="newsletterSettings.weeklyNews" class="mr-3">
-                                <span>Апталық жаңалықтар</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" v-model="newsletterSettings.projectUpdates" class="mr-3">
-                                <span>Жоба жаңартулары</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" v-model="newsletterSettings.donationReceipts" class="mr-3">
-                                <span>Қайырымдылық түбіртектері</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" v-model="newsletterSettings.emergencyAlerts" class="mr-3">
-                                <span>Шұғыл жағдай хабарландырулары</span>
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200 animate-fadeInUp"
+                    >
+                        <h3 class="text-xl font-semibold mb-5 text-green-600 border-b border-green-300 pb-2">
+                            Жаңалықтар мен хабарландырулар
+                        </h3>
+                        <div class="space-y-4">
+                            <label
+                                class="flex items-center cursor-pointer select-none hover:text-green-700 transition-colors"
+                                v-for="(value, key) in newsletterSettings"
+                                :key="key"
+                            >
+                                <input
+                                    type="checkbox"
+                                    v-model="newsletterSettings[key]"
+                                    class="mr-4 w-5 h-5 text-green-600 focus:ring-green-500 border-green-300 rounded transition"
+                                />
+                                <span class="font-medium text-green-700 capitalize">
+          {{
+                                        {
+                                            weeklyNews: 'Апталық жаңалықтар',
+                                            projectUpdates: 'Жоба жаңартулары',
+                                            donationReceipts: 'Қайырымдылық түбіртектері',
+                                            emergencyAlerts: 'Шұғыл жағдай хабарландырулары'
+                                        }[key]
+                                    }}
+        </span>
                             </label>
                         </div>
-                        <button @click="saveNewsletterSettings"
-                                class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        <button
+                            @click="saveNewsletterSettings"
+                            class="mt-6 px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-700 active:scale-95 transform transition"
+                        >
                             Сақтау
                         </button>
                     </div>
@@ -392,54 +485,80 @@
                 <!-- Cards Section -->
                 <section
                     v-show="showSection === 'cards'"
-                    class="transition-opacity duration-300"
+                    class="transition-opacity duration-500 ease-in-out"
                     :class="{ 'opacity-100': showSection === 'cards', 'opacity-0 absolute': showSection !== 'cards' }"
                 >
-                    <h2 class="text-3xl font-bold mb-6">Менің карталарым</h2>
+                    <h2 class="text-3xl font-extrabold mb-8 text-green-700 tracking-wide animate-fadeInDown">
+                        Менің карталарым
+                    </h2>
 
                     <!-- Add New Card Button -->
-                    <button @click="showAddCardForm = !showAddCardForm"
-                            class="mb-6 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    <button
+                        @click="showAddCardForm = !showAddCardForm"
+                        class="mb-8 px-8 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg shadow-md hover:from-green-500 hover:to-green-700 active:scale-95 transform transition"
+                    >
                         + Жаңа карта қосу
                     </button>
 
                     <!-- Add Card Form -->
-                    <div v-if="showAddCardForm" class="bg-white p-6 rounded-lg shadow-md mb-6">
-                        <h3 class="text-xl font-semibold mb-4">Жаңа карта қосу</h3>
-                        <form @submit.prevent="addCard" class="space-y-4">
+                    <div
+                        v-if="showAddCardForm"
+                        class="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200 mb-8 animate-fadeInUp"
+                    >
+                        <h3 class="text-xl font-semibold mb-6 text-green-700 border-b border-green-300 pb-2">
+                            Жаңа карта қосу
+                        </h3>
+                        <form @submit.prevent="addCard" class="space-y-6">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700">Карта нөмірі</label>
-                                <input type="text" v-model="newCard.number"
-                                       placeholder="1234 5678 9012 3456"
-                                       class="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                <label class="block text-sm font-semibold text-green-800">Карта нөмірі</label>
+                                <input
+                                    type="text"
+                                    v-model="newCard.number"
+                                    placeholder="1234 5678 9012 3456"
+                                    class="mt-2 w-full border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                />
                             </div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-semibold text-gray-700">Жарамдылық мерзімі</label>
-                                    <input type="text" v-model="newCard.expiry"
-                                           placeholder="MM/YY"
-                                           class="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                    <label class="block text-sm font-semibold text-green-800">Жарамдылық мерзімі</label>
+                                    <input
+                                        type="text"
+                                        v-model="newCard.expiry"
+                                        placeholder="MM/YY"
+                                        class="mt-2 w-full border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                    />
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-gray-700">CVV</label>
-                                    <input type="text" v-model="newCard.cvv"
-                                           placeholder="123"
-                                           class="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                    <label class="block text-sm font-semibold text-green-800">CVV</label>
+                                    <input
+                                        type="text"
+                                        v-model="newCard.cvv"
+                                        placeholder="123"
+                                        class="mt-2 w-full border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                    />
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700">Карта иесінің аты</label>
-                                <input type="text" v-model="newCard.holderName"
-                                       placeholder="JOHN DOE"
-                                       class="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                <label class="block text-sm font-semibold text-green-800">Карта иесінің аты</label>
+                                <input
+                                    type="text"
+                                    v-model="newCard.holderName"
+                                    placeholder="JOHN DOE"
+                                    class="mt-2 w-full border border-green-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                />
                             </div>
                             <div class="flex gap-4">
-                                <button type="submit"
-                                        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                <button
+                                    type="submit"
+                                    class="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 active:scale-95 transform transition"
+                                >
                                     Қосу
                                 </button>
-                                <button type="button" @click="showAddCardForm = false"
-                                        class="px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
+                                <button
+                                    type="button"
+                                    @click="showAddCardForm = false"
+                                    class="px-8 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500 active:scale-95 transform transition"
+                                >
                                     Болдырмау
                                 </button>
                             </div>
@@ -447,32 +566,41 @@
                     </div>
 
                     <!-- Saved Cards -->
-                    <div class="space-y-4">
-                        <div v-for="card in savedCards" :key="card.id"
-                             class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+                    <div class="space-y-6">
+                        <div
+                            v-for="card in savedCards"
+                            :key="card.id"
+                            class="bg-white p-6 rounded-xl shadow-lg flex justify-between items-center border-2 border-green-200 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 animate-popIn"
+                        >
                             <div class="flex items-center">
-                                <div class="w-12 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded mr-4 flex items-center justify-center">
-                                    <span class="text-white text-xs font-bold">{{ getCardType(card.number) }}</span>
+                                <div
+                                    class="w-14 h-10 bg-gradient-to-r from-green-400 to-green-600 rounded-lg mr-6 flex items-center justify-center text-white font-bold text-xs tracking-wide shadow-md"
+                                >
+                                    {{ getCardType(card.number) }}
                                 </div>
                                 <div>
-                                    <p class="font-semibold">**** **** **** {{ card.number.slice(-4) }}</p>
-                                    <p class="text-gray-600 text-sm">{{ card.holderName }}</p>
-                                    <p class="text-gray-500 text-xs">Жарамдылық: {{ card.expiry }}</p>
+                                    <p class="font-semibold text-green-800">**** **** **** {{ card.number.slice(-4) }}</p>
+                                    <p class="text-green-700 text-sm">{{ card.holderName }}</p>
+                                    <p class="text-green-500 text-xs italic">Жарамдылық: {{ card.expiry }}</p>
                                 </div>
                             </div>
-                            <div class="flex gap-2">
-                                <button @click="setDefaultCard(card.id)"
-                                        :class="card.isDefault ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'"
-                                        class="px-3 py-1 rounded text-sm">
+                            <div class="flex gap-3">
+                                <button
+                                    @click="setDefaultCard(card.id)"
+                                    :class="card.isDefault ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'"
+                                    class="px-4 py-1 rounded-lg text-sm font-semibold shadow-sm hover:shadow-md transition"
+                                >
                                     {{ card.isDefault ? 'Негізгі' : 'Негізгі ету' }}
                                 </button>
-                                <button @click="removeCard(card.id)"
-                                        class="px-3 py-1 bg-red-100 text-red-600 rounded text-sm hover:bg-red-200 transition">
+                                <button
+                                    @click="removeCard(card.id)"
+                                    class="px-4 py-1 bg-red-100 text-red-600 rounded-lg text-sm font-semibold hover:bg-red-200 transition shadow-sm"
+                                >
                                     Жою
                                 </button>
                             </div>
                         </div>
-                        <div v-if="!savedCards.length" class="text-gray-500 text-center py-8">
+                        <div v-if="!savedCards.length" class="text-green-400 text-center py-12 italic select-none animate-fadeIn">
                             Сақталған карталар жоқ
                         </div>
                     </div>
@@ -481,52 +609,60 @@
                 <!-- Create Groups Section -->
                 <section
                     v-show="showSection === 'createGroup'"
-                    class="transition-opacity duration-300"
+                    class="transition-opacity duration-500 ease-in-out"
                     :class="{ 'opacity-100': showSection === 'createGroup', 'opacity-0 absolute': showSection !== 'createGroup' }"
                 >
-                    <charity-group/>
+                    <charity-group class="animate-fadeInScale" />
                 </section>
 
                 <!-- Helps Section -->
                 <section
                     v-show="showSection === 'groups'"
-                    class="mt-4 transition-opacity duration-300 overflow-x-auto"
+                    class="mt-6 transition-opacity duration-500 overflow-x-auto"
                     :class="{ 'opacity-100': showSection === 'groups', 'opacity-0 absolute': showSection !== 'groups' }"
                 >
-                    <h2 class="text-3xl font-bold mb-6">Көмек керек топ</h2>
+                    <h2 class="text-3xl font-extrabold mb-6 text-green-700 tracking-wider animate-slideDown">
+                        Көмек керек топ
+                    </h2>
+
                     <!-- Helps Section Table -->
                     <table
                         v-if="helps.length"
-                        class="w-full min-w-[600px] bg-white border border-gray-300 rounded-lg overflow-x-auto text-sm md:text-base"
+                        class="w-full min-w-[600px] bg-white border border-green-300 rounded-xl shadow-lg text-sm md:text-base"
                     >
-
                         <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-3 px-4 border-b">Имя группы</th>
-                            <th class="py-3 px-4 border-b">Тема</th>
-                            <th class="py-3 px-4 border-b">Описание</th>
-                            <th class="py-3 px-4 border-b">Документы, файлы, изображение</th>
+                        <tr class="bg-green-100 border-b border-green-200 uppercase tracking-wide text-green-800 select-none animate-fadeIn">
+                            <th class="py-3 px-5 border-b border-green-200">Имя группы</th>
+                            <th class="py-3 px-5 border-b border-green-200">Тема</th>
+                            <th class="py-3 px-5 border-b border-green-200">Описание</th>
+                            <th class="py-3 px-5 border-b border-green-200">Документы, файлы, изображение</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="help in helps" :key="help.id" class="hover:bg-gray-50">
-                            <td class="py-3 px-4 border-b">{{ help.name }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.title  }}</td>
-                            <td class="py-3 px-4 border-b">{{ help.description  }}</td>
-                            <td class="py-3 px-4 border-b">
+                        <tr
+                            v-for="help in helps"
+                            :key="help.id"
+                            class="border-b border-green-100 hover:bg-green-50 transition-colors duration-300 cursor-pointer animate-fadeInUp"
+                        >
+                            <td class="py-3 px-5 text-green-900 font-medium">{{ help.name }}</td>
+                            <td class="py-3 px-5 text-green-800">{{ help.title }}</td>
+                            <td class="py-3 px-5 text-green-700">{{ help.description }}</td>
+                            <td class="py-3 px-5">
                                 <a
                                     :href="`/${help.image}`"
                                     target="_blank"
-                                    class="text-blue-500 underline"
+                                    class="text-green-600 hover:text-green-800 underline font-semibold transition"
                                 >
                                     {{ help.image.split('/').pop() }}
                                 </a>
                             </td>
-
                         </tr>
                         </tbody>
                     </table>
-                    <p v-else class="text-gray-600">Тізім бос</p>
+
+                    <p v-else class="text-green-500 italic mt-12 text-center select-none animate-fadeIn">
+                        Тізім бос
+                    </p>
                 </section>
             </main>
         </div>
@@ -724,10 +860,32 @@ export default {
             this.$router.push('/create/group');
         },
 
-        logout() {
-            alert('Сәтті шықтыңыз!');
-            this.$router.push('/');
+        async logout() {
+            try {
+                // 1. Запрос на logout endpoint (если требуется)
+                await axios.post('/logout', {}, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                // 2. Удалить токен и данные пользователя
+                localStorage.removeItem('token');
+                localStorage.removeItem('isLoggedIn');
+                delete axios.defaults.headers.common['Authorization'];
+
+                // 3. Можно также обнулить Vuex (если используешь)
+                // this.$store.commit('auth/clearUser');
+
+                // 4. Уведомление и переход на главную
+                alert('Сәтті шықтыңыз!');
+                this.$router.push('/');
+            } catch (error) {
+                console.error('Logout қатесі:', error);
+                alert('Шығу кезінде қате пайда болды.');
+            }
         },
+
 
         async listGroupHelp() {
             this.showSection = 'groups';
@@ -874,3 +1032,202 @@ export default {
     }
 };
 </script>
+
+
+<style scoped>
+@keyframes fade-in-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animate-fade-in-down {
+    animation: fade-in-down 0.3s ease forwards;
+}
+.animate-fade-in-up {
+    animation: fade-in-up 0.3s ease forwards;
+}
+
+/* Custom slow pulse animation */
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+.animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Fade transition for success message */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes pulseSlow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.6s ease forwards;
+}
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease forwards;
+}
+.animate-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.5s ease forwards;
+}
+.animate-fadeInLeft {
+    animation: fadeInLeft 0.5s ease forwards;
+}
+.animate-fadeInUp {
+    animation: fadeInUp 0.5s ease forwards;
+}
+.animate-popIn {
+    animation: popIn 0.3s ease forwards;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease forwards;
+}
+.animate-fadeInUp {
+    animation: fadeInUp 0.5s ease forwards;
+}
+.animate-slideDown {
+    animation: slideDown 0.5s ease forwards;
+}
+.animate-fadeInScale {
+    animation: fadeInScale 0.6s ease forwards;
+}
+</style>

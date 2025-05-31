@@ -23,9 +23,11 @@
 
                 <!-- Кнопкалар -->
                 <div class="flex items-center gap-3">
+                    <a href="/give-help">
                     <button class="bg-emerald-400 hover:bg-emerald-500 text-white font-medium py-2 px-4 rounded-xl shadow-md transition duration-300 transform hover:scale-105">
                         {{ $t('help') }}
                     </button>
+                    </a>
 
                     <button v-if="!isLoggedIn" @click="showModal = 'login'"
                             class="bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2 px-4 rounded-xl shadow-md transition duration-300 transform hover:scale-105">
@@ -37,36 +39,109 @@
                         {{ $t('profile') }}
                     </button>
 
-                    <!-- Тіл таңдау -->
+                    <!-- Тілдер -->
                     <div class="flex items-center gap-2">
-                        <img v-for="(flag, lang) in flags" :key="lang" :src="flag" :alt="lang"
-                             @click="changeLanguage(lang)"
-                             class="h-6 w-6 rounded-full ring ring-emerald-300 hover:ring-emerald-500 cursor-pointer transition" />
+                        <button>
+                            <img @click="changeLanguage('kz')" src="https://flagcdn.com/w40/kz.png" alt="KZ" class="h-5 w-5 rounded-full" />
+                        </button>
+                        <button>
+                            <img @click="changeLanguage('en')" src="https://flagcdn.com/w40/gb.png" alt="EN" class="h-5 w-5 rounded-full" />
+                        </button>
+                        <button>
+                            <img @click="changeLanguage('ru')" src="https://flagcdn.com/w40/ru.png" alt="RU" class="h-5 w-5 rounded-full" />
+                        </button>
                     </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Modal -->
-        <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="relative bg-white rounded-3xl w-96 p-8 shadow-2xl animate-fade-in z-10">
-                <h2 class="text-xl font-semibold text-emerald-600 mb-4">{{ $t('sign_in') }}</h2>
-                <input type="email" v-model="email" placeholder="Email"
-                       class="w-full border border-emerald-300 rounded-lg py-3 px-4 mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
-                <input type="password" v-model="password" placeholder="Password"
-                       class="w-full border border-emerald-300 rounded-lg py-3 px-4 mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
-                <button @click="login"
-                        class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-bold transition duration-300 transform hover:scale-105 shadow">
-                    {{ $t('login') }}
+        <!-- Login Modal -->
+        <div v-if="showModal === 'login'" class="fixed inset-0 z-50 flex items-center justify-center">
+            <!-- Фон (жабу үшін) -->
+            <div @click="closeModal" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+            <!-- Модаль терезесі -->
+            <div class="relative bg-white rounded-3xl w-96 p-8 shadow-2xl z-10 animate-fadeInUp transition-all duration-500">
+                <h2 class="text-center text-3xl font-extrabold mb-6 text-green-600 animate-fadeIn">{{ $t('sign_in') }}</h2>
+
+                <div class="mb-4 relative group">
+                    <input type="email" v-model="email" placeholder="hello@example.com"
+                           class="w-full border border-gray-200 rounded-xl py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 shadow-inner" />
+                </div>
+
+                <div class="mb-4 relative group">
+                    <input :type="isVisible ? 'text' : 'password'" v-model="password" placeholder="Введите пароль"
+                           class="w-full border border-gray-200 rounded-xl py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 shadow-inner" />
+                    <span @click="toggleVisibility"
+                          class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400 hover:text-green-500 transition-colors">
+                <component :is="isVisible ? 'eye-off-icon' : 'eye-icon'" class="w-5 h-5" />
+            </span>
+                </div>
+
+                <button @click="submitLogin"
+                        class="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                    {{ $t('sign_in') }}
                 </button>
-                <button @click="register"
-                        class="w-full py-3 mt-3 border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-50 rounded-lg font-bold transition duration-300 transform hover:scale-105">
-                    {{ $t('register') }}
+
+                <button @click="showModal = 'register'"
+                        class="w-full mt-3 py-3 border-2 border-green-400 text-green-500 hover:bg-green-50 font-bold rounded-xl transition-all duration-300">
+                    {{ $t('sign_up') }}
                 </button>
-                <button @click="closeModal"
-                        class="absolute top-2 right-2 text-gray-400 hover:text-emerald-500 text-xl">&times;</button>
+
+                <p class="text-xs text-center text-gray-500 mt-4">
+                    Нажимая на кнопку «Зарегистрироваться», вы соглашаетесь с условиями
+                    <a href="#" class="text-green-500 underline">договора-оферты</a> и даете согласие на обработку
+                    <a href="#" class="text-green-500 underline">персональных данных</a>.
+                </p>
+
+                <a href="#" class="text-center block mt-4 text-green-500 hover:underline transition-colors">
+                    {{$t('forgot_password')}}
+                </a>
             </div>
         </div>
+
+
+        <!-- Register Modal -->
+        <div v-if="showModal === 'register'" class="fixed inset-0 flex items-center justify-center z-50 animate-fadeInUp">
+            <div @click="closeModal" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            <div class="relative bg-white rounded-3xl w-96 p-8 shadow-2xl z-10 animate-fadeIn transition-all duration-500">
+                <h2 class="text-center text-3xl font-extrabold mb-6 text-green-600">{{ $t('sign_up') }}</h2>
+
+                <div v-if="step === 1" class="mb-4">
+                    <input v-model="email" @input="validateEmail" placeholder="Введите email" type="email" name="email"
+                           class="w-full border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 shadow-inner" />
+                    <button :disabled="!validEmail" @click="sendCode"
+                            class="w-full mt-4 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl disabled:opacity-50 transition-all duration-300 shadow-md hover:shadow-lg">
+                        {{ $t('get_code') }}
+                    </button>
+                </div>
+
+                <div v-if="step === 2" class="mb-4">
+                    <input v-model="code" @input="validateCode" maxlength="6" placeholder="Введите код" name="code"
+                           class="w-full border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 shadow-inner" />
+                    <button :disabled="code.length !== 6" @click="verifyCode"
+                            class="w-full mt-4 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl disabled:opacity-50 transition-all duration-300 shadow-md hover:shadow-lg">
+                        {{ $t('next') }}
+                    </button>
+                </div>
+
+                <div v-if="step === 3" class="mb-4">
+                    <input v-model="password" type="password" placeholder="Создайте пароль" name="password"
+                           class="w-full border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 shadow-inner" />
+                    <button @click="submitRegistration"
+                            class="w-full py-3 mt-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                        {{ $t('sign_up') }}
+                    </button>
+                </div>
+
+                <button @click="closeModal"
+                        class="w-full mt-4 py-3 border-2 border-green-400 text-green-500 hover:bg-green-50 font-bold rounded-xl transition-all duration-300">
+                    {{ $t('cancel') }}
+                </button>
+            </div>
+        </div>
+
+
     </div>
 </template>
 

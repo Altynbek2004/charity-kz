@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-
+import Navbar from './Navbar.vue';
 export default {
 
     name: "PsichologyAi",
@@ -9,12 +9,16 @@ export default {
             userMessage: '',
             messages: [],
             loading: false,
-            apiKey: 'AIzaSyAALKQv-SwkcGekyP3BvWH4P-XLk49zSJ4',
+            // apiKey: 'AIzaSyAALKQv-SwkcGekyP3BvWH4P-XLk49zSJ4',
+            apiKey:  import.meta.env.VITE_API_KEY,
             sessionId: null
         };
     },
+    components: {
+        Navbar,
+    },
     methods: {
-        async sendMessage() {
+       /* async sendMessage() {
             if (!this.userMessage.trim()) return;
 
             const userMessageText = this.userMessage.trim();
@@ -90,7 +94,53 @@ export default {
                     this.scrollToBottom();
                 });
             }
+        },*/
+
+        async sendMessage() {
+            if (!this.userMessage.trim()) return;
+
+            const userMessageText = this.userMessage.trim();
+            this.messages.push({ role: 'user', content: userMessageText });
+            this.userMessage = '';
+            this.loading = true;
+
+            try {
+                const response = await axios.post(
+                    'https://api.openai.com/v1/chat/completions',
+                    {
+                        model: this.sessionId ? 'gpt-4' : 'gpt-3.5-turbo',
+                        messages: this.messages.map(msg => ({
+                            role: msg.role,
+                            content: msg.content
+                        })),
+                        temperature: 0.7,
+                        max_tokens: 1000
+                    },
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${this.apiKey}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                const aiResponse = response.data.choices[0].message.content;
+
+                this.messages.push({ role: 'assistant', content: aiResponse });
+            } catch (error) {
+                console.error('Ошибка при отправке запроса:', error);
+                this.messages.push({
+                    role: 'assistant',
+                    content: 'Извините, произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте еще раз позже.'
+                });
+            } finally {
+                this.loading = false;
+                this.$nextTick(() => {
+                    this.scrollToBottom();
+                });
+            }
         },
+
         scrollToBottom() {
             if (this.$refs.messagesContainer) {
                 this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight;
@@ -128,6 +178,8 @@ export default {
 </script>
 
 <template>
+
+    <navbar />
     <div class="bg-white min-h-screen p-6">
         <h2 class="text-2xl font-bold text-center mb-4 text-green-600 animate-fade-in-up">
             {{ $t('askQuestion.title') }}

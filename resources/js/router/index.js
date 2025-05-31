@@ -17,6 +17,7 @@ import Donate from '../components/design/Donate.vue';
 import notFound from '../components/design/notFound.vue';
 import AboutUsSection from '../components/design/AboutUsSection.vue';
 import AboutUs from '../components/design/AboutUs.vue';
+import FAQ from '../components/design/FAQ.vue';
 
 const routes = [
     {
@@ -92,6 +93,10 @@ const routes = [
     {
         path: '/about-us',
         component:AboutUs
+    },
+    {
+        path: '/faq',
+        component:FAQ
     }
 ];
 

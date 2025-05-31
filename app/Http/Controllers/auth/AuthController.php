@@ -54,10 +54,24 @@ class AuthController extends Controller
     /**
      * Выход пользователя из системы
      */
-    public function logout(Request $request)
+   /* public function logout(Request $request)
     {
+
 // Удаляем текущий токен авторизации
         $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Выход выполнен успешно'
+        ]);
+    }*/
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout(); // Пайдаланушыны сессиядан шығару
+
+        $request->session()->invalidate(); // Сессияны жою
+        $request->session()->regenerateToken(); // CSRF токенді жаңарту
 
         return response()->json([
             'success' => true,
